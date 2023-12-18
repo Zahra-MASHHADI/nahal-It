@@ -38,6 +38,8 @@ import {
     getCoupons,
     getGalleryById,
     getLinks,
+    getBanner,
+    addBanner,
     getNews,
     getOrders,
     getDetailOrders,
@@ -52,7 +54,8 @@ import {
     getEmployee,
     getWorkSamples,
     updateRole,
-    updateUser
+    updateUser,
+    getSupervisorProjects
 } from "./action";
 
 const initialState = {
@@ -61,22 +64,26 @@ const initialState = {
     gallerySwitch:'all',
     productsSwitch:'all',
     rolesSwitch:'all',
-    employeeSwitch:'all',
     couponSwitch:'all',
     projectSwitch:'all',
     discountSwitch:'all',
+    employeesSwitch:"approval",
     linksSwitch:'all',
+    bannerSwitch:'all',
     newsSwitch:'all',
     tagsSwitch:'all',
     productId:null,
     products:[],
     projects:[],
+    supervisorprojects:[],
     discounts:[],
     coupons:[],
     productsLoading:false,
+    supervisorprojectsLoading:false,
     discountsLoading:false,
     newsLoading:false,
     linksLoading:false,
+    bannerLoading:false,
     deleteProductSuccess:false,
     couponsSuccess:false,
     usersLoading:false,
@@ -93,6 +100,7 @@ const initialState = {
     users:[],
     news:[],
     links:[],
+    banner:[],
     projectsLoading:false,
     couponLoading:false,
     blogsLoading : false,
@@ -106,7 +114,7 @@ const initialState = {
     detailOrders:[],
     gallery:[],
     employee:[],
-    employeesSwitch:"all",
+  
     galleryId:"",
     categoriesLoading:false,
     categoriesError:'',
@@ -124,7 +132,7 @@ const initialState = {
     permissions:[],
     userPermissions:[],
     permissionsForEdit:[],
-    photoSlider:[],
+    photoBanner:[],
     categoriesSwitch:
     {
         key:'PARENT',
@@ -142,6 +150,7 @@ const dashboardSlice = createSlice({
         setContent : (state,action) => {
            
             console.log(state)
+            console.log(action)
             state.content = action.payload;
 
         },
@@ -170,7 +179,7 @@ const dashboardSlice = createSlice({
                 break;
                 case 'roles' : {
                     state.rolesSwitch = value;
-                    console.log(value)
+                    
                 }
                 break;
                 case 'employee' : {
@@ -190,6 +199,8 @@ const dashboardSlice = createSlice({
                 case 'news' : state.newsSwitch = value;
                 break;
                 case 'links' : state.linksSwitch = value;
+                break;
+                case 'banner' : state.bannerSwitch = value;
                 break;
                 default : console.log('non value')
             }
@@ -668,7 +679,6 @@ const dashboardSlice = createSlice({
         //getEmployees
         .addCase(getEmployee.fulfilled, (state, action) => {
             state.usersLoading = false;
-            state.employee = action.payload.users.filter(user => user.role_id === 6);
             console.log(state.employee)
         })
         .addCase(getEmployee.pending, (state, action) => {
@@ -678,6 +688,19 @@ const dashboardSlice = createSlice({
             state.usersLoading = false;
             console.error(action);
         })
+        .addCase(getSupervisorProjects.fulfilled, (state, action) => {
+            state.supervisorprojectsLoading = false;
+            state.supervisorprojects =  action.payload.data;
+            
+        })
+        .addCase(getSupervisorProjects.pending, (state, action) => {
+            state.supervisorprojectsLoading = true;
+        })
+        .addCase(getSupervisorProjects.rejected, (state, action) => {
+            state.supervisorprojectsLoading = false;
+            console.error(action);
+        })
+        
         // update user
         .addCase(updateUser.fulfilled,(state,action) => {
             state.usersLoading = false;
@@ -990,6 +1013,32 @@ const dashboardSlice = createSlice({
             state.linkDeleteLoading = false;
             toast.error('خطا در  حذف مسیر')
         })
+        //  banner image
+        .addCase(getBanner.fulfilled,(state,action) => {
+            state.bannerLoading = false;
+            state.banner = action.payload.data;
+            console.log(action)
+        })
+        .addCase(getBanner.pending,(state,action) => {
+            state.bannerLoading = true;
+        })
+        .addCase(getBanner.rejected,(state,action) => {
+            state.bannerLoading = false;
+            toast.error('خطا در  بارگیری')
+        })
+        .addCase(addBanner.fulfilled,(state,action) => {
+            state.bannerLoading = false;
+            toast.success("با موفقیت ذخیره شد")
+        })
+        .addCase(addBanner.pending,(state,action) => {
+            state.bannerLoading = true;
+        })
+        .addCase(addBanner.rejected,(state,action) => {
+            state.bannerLoading = false;
+            toast.error('خطا در  افزودن مسیر')
+        })
+
+
     }
 })
 

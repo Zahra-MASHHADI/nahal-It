@@ -22,7 +22,23 @@ export const updateUserInfo = createAsyncThunk("userPanel/updateUserInfo" , asyn
       }
     }
 })
-
+export const updateUserRole = createAsyncThunk("userPanel/updateUserRole" , async ({userId,role_id}) => {
+   
+    try {
+        await instance.post(`role/changeUserRole/${userId}` , role_id)
+ 
+        return { data : response.data };
+    }
+    catch (axiosError) {
+        let err = axiosError
+        return{
+            error:{
+                status : err?.status,
+                data : err.response?.data || err.massage 
+            }
+        }
+    }
+})
 export const changeUserPassword = createAsyncThunk("userPanel/changeUserPassword" , async (dataObj) => {
     try {
         const response = await instance.post(`/users/changePassword`,dataObj);

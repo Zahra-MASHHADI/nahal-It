@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserInfo } from '../../../../../features/userPanel/action';
+import { updateUserInfo, updateUserRole } from '../../../../../features/userPanel/action';
 import moment from 'moment-jalaali';
 
 function UserDetails({ setShowDetails , showDetails }) {
@@ -22,7 +22,8 @@ function UserDetails({ setShowDetails , showDetails }) {
             ...showDetails,
             role_id:id
         };
-        dispatch(updateUserInfo({userId:dataObj.id,dataObj}));
+        let role_id = {role_id:dataObj.role_id}
+        dispatch(updateUserRole({userId:dataObj.id,role_id}));
     }
 
   return (

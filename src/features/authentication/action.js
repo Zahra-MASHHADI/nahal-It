@@ -19,7 +19,7 @@ export const register = createAsyncThunk('authentication/register', async (dataO
 
 export const login = createAsyncThunk('authentication/login', async (dataObj) => {
         try {
-        const response = await axios.post('http://api.nahalit.ir/api/v1/users/login',dataObj)
+        const response = await axios.post('https://api.nahalit.ir/api/v1/users/login',dataObj)
         return { data: response.data }
     } catch (axiosError) {
         let err = axiosError

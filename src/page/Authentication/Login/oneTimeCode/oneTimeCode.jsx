@@ -14,6 +14,7 @@ export default function OneTimeCode(){
     const loading = useSelector(state => state.authentication.loading);
     const redirect = useSelector(state => state.authentication.redirect);
     const codeSent = useSelector(state => state.authentication.codeSent);
+    const oneTimeCode = useSelector(state => state.authentication.oneTimeCode);
     const phoneRef = useRef();
     const codeRef = useRef();
     const navigate = useNavigate();
@@ -35,7 +36,8 @@ export default function OneTimeCode(){
     e.preventDefault();
     let phone = phoneRef.current.value;
     console.log(codeSent);
-    if(codeSent){
+    console.log(oneTimeCode);
+    if(oneTimeCode){
     let code = codeRef.current.value;
     switch(true) {
       case code.length === 0 : toast.warn("کد  را وارد کنید");
@@ -88,7 +90,7 @@ export default function OneTimeCode(){
                           <label className='text-stone-600 w-full' htmlFor="phone">شماره موبایل:</label>
                           <input ref={phoneRef} type="tel" className='bg-gray-300 font-[shabnam] text-left outline-none text-[1.1rem] border-none 2xl:p-2 w-full p-2' name='phone'/>
                         </div>
-                        { codeSent &&
+                        { oneTimeCode &&
                             
                             <div className='flex flex-col items-center gap-2 w-full lg:items-center text-sm'>
                             <SendCodeTimer />
@@ -102,7 +104,7 @@ export default function OneTimeCode(){
                       {
                         loading
                         ? <img src={loadingSvg} alt="loading" className='w-[1.5rem]'/>
-                        : <span > { codeSent ? "ورود" :
+                        : <span > { oneTimeCode ? "ورود" :
                          " دریافت کد "
                           } </span>
                       }

@@ -253,8 +253,15 @@ export const deleteUser = createAsyncThunk('dashboard/deleteUser', async (id) =>
 })
 
 export const getEmployee = createAsyncThunk('dashboard/getEmployee', async () => {
-    const response = await instance.get('/users');
+    const response = await instance.get('/recruitments');
     const { data } = response;
+    console.log(data)
+    return data;
+});
+export const getSupervisorProjects = createAsyncThunk('dashboard/getSupervisorProjects', async (id) => {
+    const response = await instance.get(`getSupervisorProjects/${id}`);
+    const { data } = response;
+    console.log(data)
     return data;
 });
 
@@ -362,8 +369,13 @@ export const deleteLink = createAsyncThunk("dashboard/deleteLink" , async (id) =
     return data;
 });
 // photo slider
-export const getPhotoSlider = createAsyncThunk("dashboard/getPhotoSlider" , async () => {
-    const response = await instance.get(`/images`);
+export const getBanner = createAsyncThunk("dashboard/getBanners" , async () => {
+    const response = await instance.get(`/banners`);
+    const { data } = response;
+    return data;
+})
+export const addBanner = createAsyncThunk("dashboard/addBanners" , async (dataObj) => {
+    const response = await instance.post(`/banners` , dataObj);
     const { data } = response;
     return data;
 })

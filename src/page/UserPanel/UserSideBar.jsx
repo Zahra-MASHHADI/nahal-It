@@ -14,7 +14,7 @@ const UserSideBar = ({ dropMenu , logOutHandle}) => {
         <SideBarLink link={"favorites"} text={"علاقه مندی ها"}/>
         <SideBarLink link={"orders"} text={"سفارش ها"}/>
         <SideBarLink link={"downloads"} text={"دانلود ها"}/>
-        {userInfo.role_id === 5 && <SideBarLink link={'projects'} text={"پروژه ها"} />}
+        {userInfo.role_id === 5 && <SideBarLink link={'supervisorProjects'} text={"پروژه ها"}/>}
         <SideBarLink link={"/"} text={"صفحه اصلی"}/>
     
         <li>

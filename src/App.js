@@ -66,6 +66,8 @@ import NewsPage from "./page/NewsPage/NewsPage";
 import OneTimeCode from "./page/Authentication/Login/oneTimeCode/oneTimeCode.jsx";
 import UserProjects from "./page/UserPanel/UserProjects.jsx";
 import ProjectPagination from "./Components/Dashboard/Content/Projects/All/ProjectPagination/ProjectPagination.jsx";
+import SupervisorProjectPagination from "./Components/Dashboard/Content/Projects/supervisorProjects/supervisorProjectsPagination/SupervisorProjectsPagination.jsx";
+
 
 
 const App = () => {
@@ -130,6 +132,7 @@ const App = () => {
             <Route path="favorites" element={<Favorites/>}/>
             <Route path="userProfile" element={<UserProfile/>}/>
             <Route path="projects" element={<ProjectPagination/>}/>
+            <Route path="supervisorProjects" element={<SupervisorProjectPagination/>}/>
             <Route path="orders" element={<Orders/>}/>
           </Route>
           <Route path="about_us" element={<About_us/>}/>

@@ -148,18 +148,20 @@ const authenticationSlice = createSlice({
         })
         
         .addCase(loginCode.fulfilled, (state, action) => {
-            state.sendCodeLoading = false;
+            // state.sendCodeLoading = false;
+ 
             if (action.payload.error) {
                 toast.warn(action.payload.error.data?.massage);
                 state.codeSent = false;
-                state.oneTimeCode = true;
+                state.oneTimeCode = false;
             
             } else {
+
+                state.oneTimeCode = true;
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
                 state.codeSent = true;
-                state.oneTimeCode = true;
-                console.log(state.token);
+               
                 state.token = action.payload.data.token; 
                
             }
