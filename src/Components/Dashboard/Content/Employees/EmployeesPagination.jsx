@@ -5,6 +5,7 @@ import EmployeeDetails from "./EmployeeDetail";
 import Employee from "./Employee";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import UnEmployee from "./unEmployee";
 
 
 export default function EmployeesPagination(){
@@ -18,6 +19,22 @@ export default function EmployeesPagination(){
     const endOffset = itemOffset + itemsPerPage;
     const currentItems = employees.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(employees.length / itemsPerPage);
+  const [innerComponent,setInnerComponent] = useState(<></>);
+    const Criterion = useSelector(state=> state.dashboard.employeesSwitch);
+    const unapproval = currentItems.filter(item =>item.status === 'waiting');
+    const approval = currentItems.filter(item =>item.status === 'accepted');
+    const [items, setItems] = useState([]);
+    useEffect(()=>{
+        switch(Criterion)
+        {
+            case 'unapproval' : setItems(unapproval) ;
+            break;
+            case 'approval' : setItems(approval) ;
+            break;
+            default : setInnerComponent(<></>)
+        }
+    },[Criterion])
+console.log(items);
     const dispatch = useDispatch();
     useEffect(()=>{
       dispatch(getEmployee())
@@ -47,7 +64,7 @@ export default function EmployeesPagination(){
             </div>
             :
             <>
-            <Employee currentItems={currentItems} setShowDetails={setShowDetails}/>
+            <Employee currentItems={items} setShowDetails={setShowDetails}/>
             <ReactPaginate
             breakLabel="..."
             nextLabel={mobile ? '>>' : "برگه بعدی >>"}

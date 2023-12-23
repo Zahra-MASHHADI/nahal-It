@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { addBanner } from '../../../../../features/dashboard/action';
 import Editor from '../../../../Editor/Editor';
 
 function NewArticle() {
@@ -55,7 +54,7 @@ function NewArticle() {
             formdata.append("user_id", form.user_id );
             formdata.append("is_active", form.is_active);
             formdata.append("image", form.image , `${imageRef.current.value}`);
-            dispatch(addBanner(formdata))
+         
     }
 
     return (

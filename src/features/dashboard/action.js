@@ -85,8 +85,11 @@ export const editProject = createAsyncThunk('dashboard/editProject', async ({id,
     const { data } = response;
     return data;
 });
-
-
+export const choiceRecruitment = createAsyncThunk('dashboard/choiceRecruitment', async ({user,status}) => {
+    const response = await instance.post(`/role/choiceRecruitment/${user}`,{status});
+    const { data } = response;
+    return data;
+})
 
 // discount
 export const addDiscount = createAsyncThunk('dashboard/addDiscount', async ({id,value}) => {

@@ -11,8 +11,9 @@ const initialState = {
     codeSent:false,
     sendCodeLoading:false,
     oneTimeCode : false,
-    verifyPasswordCode :false
-}
+    verifyPasswordCode :false,
+    token: '',
+}   
 
 const authenticationSlice = createSlice({
     name:'authentication',
@@ -40,7 +41,6 @@ const authenticationSlice = createSlice({
             {
                 state.loading = false;
                 state.redirect = true;
-                console.log(action)
                 toast.success(action.payload.data.massage)
                 Cookies.set("user",JSON.stringify(action.payload.data.user))
                 localStorage.setItem("access_token",action.payload.data.token)
@@ -61,14 +61,14 @@ const authenticationSlice = createSlice({
                 state.loading = false;
                 state.redirect = false;
                 toast.warning(action.payload.error.data?.massage)
-                console.log(action)
             }
             else
             {
+                console.log(action.payload)
                 state.loading = false;
                 state.redirect = true;
                 toast.success(action.payload.data?.massage);
-                console.log(action)
+                state.token = action.payload.data.token;
                 localStorage.setItem("access_token",action.payload.data.token);
                 Cookies.set("user",JSON.stringify(action.payload.data.user));
                 state.loginStatus = true;
@@ -100,7 +100,6 @@ const authenticationSlice = createSlice({
         .addCase(forgetPassword.rejected,(state,action) => {
             state.loading = false;
             state.redirect = false;
-            console.log(action)
         })
         .addCase(sendCode.fulfilled,(state,action) => {
             state.sendCodeLoading = false;

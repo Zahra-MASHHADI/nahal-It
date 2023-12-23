@@ -55,7 +55,8 @@ import {
     getWorkSamples,
     updateRole,
     updateUser,
-    getSupervisorProjects
+    getSupervisorProjects,
+    choiceRecruitment
 } from "./action";
 
 const initialState = {
@@ -679,12 +680,23 @@ const dashboardSlice = createSlice({
         //getEmployees
         .addCase(getEmployee.fulfilled, (state, action) => {
             state.usersLoading = false;
-            console.log(state.employee)
+            state.employee = action.payload.recruitment;
         })
         .addCase(getEmployee.pending, (state, action) => {
             state.usersLoading = true;
         })
         .addCase(getEmployee.rejected, (state, action) => {
+            state.usersLoading = false;
+            console.error(action);
+        })
+        .addCase(choiceRecruitment.fulfilled, (state, action) => {
+            state.usersLoading = false;
+            
+        })
+        .addCase(choiceRecruitment.pending, (state, action) => {
+            state.usersLoading = true;
+        })
+        .addCase(choiceRecruitment.rejected, (state, action) => {
             state.usersLoading = false;
             console.error(action);
         })

@@ -1,11 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { A11y, Autoplay, EffectCards, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getBanner } from "../../features/dashboard/action";
 
 const SliderSwiper = () => {
-  const photoSlider = useSelector(state => state.photoSlider);
-
+  const photoSlider = useSelector(state => state.dashboard.banner);
+  const dispatch = useDispatch();
+useEffect(()=>{
+  dispatch(getBanner())
+  console.log(photoSlider)
+},[])
   return (
     <div className="relative -z-50 max-w-full overflow-hidden">
       <Swiper

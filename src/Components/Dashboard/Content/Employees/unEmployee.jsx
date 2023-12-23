@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { CgCalendarDates } from 'react-icons/cg';
-import { FaUsers } from 'react-icons/fa';
-import { HiUserCircle } from 'react-icons/hi';
-import { MdOutlineAlternateEmail } from 'react-icons/md';
-import { TbAlphabetLatin, TbListDetails } from 'react-icons/tb';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteUser } from '../../../../features/dashboard/action';
-import moment from 'moment-jalaali';
-
-
-function Employee({ currentItems , setShowDetails }) {
-  console.log(currentItems);
-  return (
-      <div className='w-full p-10 flex items-center 2xl:w-[70%] flex-col gap-5'>
-      <span className='w-full text-white font-bold'>تعداد استخدامی ها ({currentItems !== null ? currentItems.length : 'NaN'})</span>
+export default function UnEmployee({ currentItems , setShowDetails }){
+    console.log(currentItems)
+    return(
+<div className='w-full p-10 flex items-center 2xl:w-[70%] flex-col gap-5'>
+      <span className='w-full text-white font-bold'>تعداد در انتظار استخدام ({currentItems !== null ? currentItems.length : 'NaN'})</span>
       <div className='hidden md:flex bg-[#ffffff69] w-full p-5 text-white text-2xl justify-between'>
         <FaUsers/>
         <TbAlphabetLatin/>
@@ -37,7 +26,5 @@ function Employee({ currentItems , setShowDetails }) {
         }
       </div>
       </div>
-  )
+    )
 }
-
-export default Employee;

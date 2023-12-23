@@ -50,7 +50,7 @@ export const sendCode = createAsyncThunk('authentication/sendCode', async () => 
 
 export const loginCode = createAsyncThunk('authentication/loginCode', async (dataObj) => {
     try {
-        const response = await instance.post('/sms/oneTimeCode' , dataObj);
+        const response = await axios.post('https://api.nahalit.ir/api/v1/sms/oneTimeCode' , dataObj);
         return { data: response.data }
     } catch (axiosError) {
         let err = axiosError
@@ -64,7 +64,7 @@ export const loginCode = createAsyncThunk('authentication/loginCode', async (dat
 });
 export const verifyOneTimeCode = createAsyncThunk('authentication/verifyOneTimeCode', async (dataObj) => {
     try {
-        const response = await instance.post('sms/verifyOneTimeCode',dataObj);
+        const response = await axios.post('https://api.nahalit.ir/api/v1/sms/verifyOneTimeCode',dataObj);
         return { data: response.data }
     } catch (axiosError) {
         let err = axiosError
@@ -78,7 +78,7 @@ export const verifyOneTimeCode = createAsyncThunk('authentication/verifyOneTimeC
 });
 export const verifyPasswordCode = createAsyncThunk('authentication/verifyPasswordCode', async (dataObj) => {
     try {
-        const response = await instance.post('sms/verifyResetPassword',dataObj);
+        const response = await axios.post('https://api.nahalit.ir/api/v1/sms/verifyResetPassword',dataObj);
         return { data: response.data }
     } catch (axiosError) {
         let err = axiosError
@@ -107,7 +107,8 @@ export const verifyCode = createAsyncThunk('authentication/verifyCode', async (d
 
 export const forgetPassword = createAsyncThunk('authentication/forgetPassword', async (dataObj) => {
     try {
-        const response = await axios.post("http://api.nahalit.ir/api/v1/users/doChangePassword",dataObj);
+        const response = await axios.post("https://api.nahalit.ir/api/v1/users/doChangePassword",dataObj);
+        console.log(response.data)
         return { data: response.data }
     } catch (axiosError) {
         let err = axiosError

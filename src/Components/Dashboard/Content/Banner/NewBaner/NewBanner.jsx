@@ -27,7 +27,7 @@ function NewBanner() {
         title,
         user_id: JSON.parse(Cookies.get('user')).id
     }
-    formData.image = imageNames
+    formData.image = imageNames.name
       switch(true)
       {
         case title === '' : toast.warn('عنوان را وارد کنید')
