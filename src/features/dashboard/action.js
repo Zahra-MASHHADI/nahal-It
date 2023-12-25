@@ -360,8 +360,19 @@ export const deleteUser = createAsyncThunk(
 export const getEmployee = createAsyncThunk(
   "dashboard/getEmployee",
   async () => {
-    const response = await instance.get("/users");
+    const response = await instance.get("/recruitments");
     const { data } = response;
+    console.log(data)
+    return data.recruitment;
+  }
+);
+export const choiceEmployee = createAsyncThunk(
+  "dashboard/choiceEmployee",
+  async ({user , status}) => {
+   
+    const response = await instance.post(`/choiceRecruitment/${user}` , {status});
+    const { data } = response;
+    console.log(data)
     return data;
   }
 );
@@ -414,7 +425,29 @@ export const getDetailOrders = createAsyncThunk(
     return data;
   }
 );
+// banner 
+export const getBanner = createAsyncThunk("dashboard/getBanner", async () => {
+  const response = await instance.get("");
+  const { data } = response;
+  return data;
+});
 
+export const addBanner = createAsyncThunk("dashboard/addBanner", async (dataObj) => {
+  const response = await instance.post("/banners" , dataObj);
+  const { data } = response;
+  return data;
+});
+
+export const deleteBanner = createAsyncThunk("dashboard/deleteBanner", async (id) => {
+  const response = await instance.post(`/banners/${id}`);
+  const { data } = response;
+  return data;
+});
+export const editBanner = createAsyncThunk("dashboard/editBanner", async (id , dataObj) => {
+  const response = await instance.post(`/banners/${id}?method=PATCH` , dataObj);
+  const { data } = response;
+  return data;
+});
 // coupons
 export const getCoupons = createAsyncThunk("dashboard/getCoupons", async () => {
   const response = await instance.get(`/coupons`);

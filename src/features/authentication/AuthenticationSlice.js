@@ -150,11 +150,13 @@ const authenticationSlice = createSlice({
         .addCase(loginCode.fulfilled, (state, action) => {
             state.sendCodeLoading = false;
             if (action.payload.error) {
+         
                 toast.warn(action.payload.error.data?.massage);
                 state.codeSent = false;
                 state.oneTimeCode = true;
             
             } else {
+             
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
                 state.codeSent = true;
@@ -183,7 +185,8 @@ const authenticationSlice = createSlice({
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
                 state.redirect = true;
-                console.log(action);
+                localStorage.setItem("access_token",action.payload.data.token);
+                state.loginStatus = true;
             }
         })
         .addCase(verifyOneTimeCode.pending,(state) => {
@@ -206,6 +209,7 @@ const authenticationSlice = createSlice({
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
                 state.redirect = true;
                 state.verifyPasswordCode = true;
+                localStorage.setItem("access_token",action.payload.data.token);
                 console.log(action);
             }
         })

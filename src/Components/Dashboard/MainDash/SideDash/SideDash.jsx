@@ -28,6 +28,7 @@ import { RiUserStarFill } from "react-icons/ri";
 function SideDash({ dropMenu, setDropMenu }) {
   // const [cRotate,setCRotate] = useState(false);
   const [aRotate, setARotate] = useState(false);
+  const [eRotate, setERotate] = useState(false);
   const [pRotate, setPRotate] = useState(false);
   const [prRotate, setPRRotate] = useState(false);
   const [cRotate, setCRotate] = useState(false);
@@ -39,10 +40,13 @@ function SideDash({ dropMenu, setDropMenu }) {
   const [tRotate, setTRotate] = useState(false);
   const [nRotate, setNRotate] = useState(false);
   const [lRotate, setLRotate] = useState(false);
+  const [bRotate, setBRotate] = useState(false);
   const content = useSelector((state) => state.dashboard.content);
   const aCriterion = useSelector((state) => state.dashboard.articlesSwitch);
+  const eCriterion = useSelector((state) => state.dashboard.employeesSwitch);
   const pCriterion = useSelector((state) => state.dashboard.productsSwitch);
   const gCriterion = useSelector((state) => state.dashboard.gallerySwitch);
+  const bCriterion = useSelector((state) => state.dashboard.bannerSwitch);
   const rCriterion = useSelector((state) => state.dashboard.rolesSwitch);
   const roles = useSelector((state) => state.dashboard.roles);
   const prCriterion = useSelector((state) => state.dashboard.projectSwitch);
@@ -69,7 +73,9 @@ function SideDash({ dropMenu, setDropMenu }) {
         wRotate |
         tRotate |
         coRotate |
+        eRotate |
         nRotate |
+        bRotate |
         lRotate &&
       value !== "articles"
     ) {
@@ -84,6 +90,8 @@ function SideDash({ dropMenu, setDropMenu }) {
       setTRotate(false);
       setNRotate(false);
       setLRotate(false);
+      setERotate(false);
+      setBRotate(false);
     } else if (
       pRotate |
         cRotate |
@@ -95,6 +103,8 @@ function SideDash({ dropMenu, setDropMenu }) {
         tRotate |
         coRotate |
         nRotate |
+        eRotate |
+        bRotate |
         lRotate &&
       value !== "products"
     ) {
@@ -109,6 +119,8 @@ function SideDash({ dropMenu, setDropMenu }) {
       setTRotate(false);
       setNRotate(false);
       setLRotate(false);
+      setERotate(false);
+      setBRotate(false);
     }
   };
 
@@ -452,18 +464,56 @@ function SideDash({ dropMenu, setDropMenu }) {
           </li>
           <div className="w-[1.5rem] h-[1.5rem]"></div>
         </div>
-        <div
-          onClick={() => {
-            listSwitch("employee");
-          }}
-          style={{ backgroundColor: content === "users" ? "#232c38" : "" }}
-          className="flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300"
-        >
-          <FaIdCard className="bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]" />
-          <li className="text-white font-bold text-lg  text-center">
-            استخدامی ها
-          </li>
-          <div className="w-[1.5rem] h-[1.5rem]"></div>
+        <div className="w-full flex flex-col items-center">
+          <div
+            onClick={() => {
+              listSwitch("employee");
+              setERotate(!eRotate);
+              dispatch(setSwitch({ key: "employee", value: "unapproval" }));
+            }}
+            style={{ backgroundColor: content === "employee" ? "#232c38" : "" }}
+            className="flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300"
+          >
+            <TbDiscountCheckFilled className="bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]" />
+            <li className="text-white font-bold text-lg  text-center">استخدامی ها</li>
+            <MdOutlineArrowLeft
+              className="text-white w-[1.5rem] h-[1.5rem] transition-all duration-300"
+              style={{ rotate: eRotate ? "-90deg" : "0deg" }}
+            />
+          </div>
+          <div
+            className="flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400"
+            style={{
+              height: eRotate ? "fit-content" : "0px",
+              padding: eRotate ? "10px" : "0px",
+              overflow: eRotate ? "" : "hidden",
+              visibility: eRotate ? "visible" : "hidden",
+              marginTop: eRotate ? "1rem" : "0px",
+            }}
+          >
+            <button
+              className="font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1"
+              onClick={() =>
+                dispatch(setSwitch({ key: "employee", value: "unapproval" }))
+              }
+              style={{
+                backgroundColor: eCriterion === "unapproval" ? "#ffffff4d" : "",
+              }}
+            >
+             در انتظار استخدام
+            </button>
+            <button
+              className="font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1"
+              onClick={() =>
+                dispatch(setSwitch({ key: "employee", value: "approval" }))
+              }
+              style={{
+                backgroundColor: eCriterion === "approval" ? "#ffffff4d" : "",
+              }}
+            >
+              استخدام شده
+            </button>
+          </div>
         </div>
 
         <div className="w-full flex flex-col items-center">
@@ -609,6 +659,58 @@ function SideDash({ dropMenu, setDropMenu }) {
               onClick={() => dispatch(setSwitch({ key: "tags", value: "new" }))}
               style={{
                 backgroundColor: tCriterion === "new" ? "#ffffff4d" : "",
+              }}
+            >
+              ایجاد
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full flex flex-col items-center">
+          <div
+            onClick={() => {
+              listSwitch("banner");
+              setBRotate(!bRotate);
+              dispatch(setSwitch({ key: "banner", value: "all" }));
+            }}
+            style={{ backgroundColor: content === "coupon" ? "#232c38" : "" }}
+            className="flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300"
+          >
+            <RiCoupon3Fill className="bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]" />
+            <li className="text-white font-bold text-lg  text-center">بنر ها</li>
+            <MdOutlineArrowLeft
+              className="text-white w-[1.5rem] h-[1.5rem] transition-all duration-300"
+              style={{ rotate: bRotate ? "-90deg" : "0deg" }}
+            />
+          </div>
+          <div
+            className="flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400"
+            style={{
+              height: bRotate ? "fit-content" : "0px",
+              padding: bRotate ? "10px" : "0px",
+              overflow: bRotate ? "" : "hidden",
+              visibility: bRotate ? "visible" : "hidden",
+              marginTop: bRotate ? "1rem" : "0px",
+            }}
+          >
+            <button
+              className="font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1"
+              onClick={() =>
+                dispatch(setSwitch({ key: "banner", value: "all" }))
+              }
+              style={{
+                backgroundColor: bCriterion === "all" ? "#ffffff4d" : "",
+              }}
+            >
+              همه
+            </button>
+            <button
+              className="font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1"
+              onClick={() =>
+                dispatch(setSwitch({ key: "banner", value: "new" }))
+              }
+              style={{
+                backgroundColor: bCriterion === "new" ? "#ffffff4d" : "",
               }}
             >
               ایجاد

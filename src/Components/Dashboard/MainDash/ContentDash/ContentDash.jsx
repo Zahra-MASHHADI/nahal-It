@@ -14,7 +14,9 @@ import UsersPagination from "../../Content/Users/UsersPagination/UsersPagination
 import News from "../../Content/News/News";
 import Links from "../../Content/Links/Links";
 import EmployeesPagination from "../../Content/Employees/EmployeesPagination";
+
 import SupervisorsPagination from "../../Content/supervisors/SupervisorsPagination";
+import Banner from "../../Content/Banner/Banner";
 
 function ContentDash() {
   const [currentContent, setCurrentContent] = useState(null);
@@ -66,6 +68,9 @@ function ContentDash() {
       case "news":
         setCurrentContent(<News />);
         break;
+        case "banner":
+          setCurrentContent(<Banner />);
+          break;
       case "links":
         setCurrentContent(<Links />);
         break;

@@ -8,8 +8,10 @@ import Header from "../../Components/Header/Header";
 import ResponseHeader from "../../Components/ResponseHeader/ResponseHeader";
 import { toast } from "react-toastify";
 import { sendRecruitment } from "../../features/recruitment/action";
+import Cookies from "js-cookie";
 
 const Recruitment = () => {
+  const userInfo = JSON.parse(Cookies.get("user"));
   const loading = useSelector(state => state.recruitment.loading);
   const [birthDate,setBirthDate] = useState('');
   const dispatch = useDispatch();
@@ -24,7 +26,8 @@ const Recruitment = () => {
     dataObj = {
       ...dataObj,
       birthday:birthDate,
-      status:0
+      status:"waiting",
+      user_id:userInfo.id
     }
     console.log(dataObj)
     if(dataObj.phone < 12){
@@ -99,6 +102,14 @@ const Recruitment = () => {
                 نام خانوادگی <span className="text-red-500">*</span>
               </label>
               <input required={true} id="last_name" className="py-2 border border-solid border-[#c7c7c7] outline-none px-2" type="text" />
+              <label htmlFor="code_melli" className="font-[shabnamBold]">
+                کد ملی<span className="text-red-500">*</span>
+              </label>
+              <input 
+              required={true} 
+              id="code_melli" 
+              className="py-2 border border-solid border-[#c7c7c7] outline-none px-2" 
+              type="text" />
               <label htmlFor="email" className="font-[shabnamBold]">
                 ایمیل شما <span className="text-red-500">*</span>
               </label>
@@ -152,6 +163,10 @@ const Recruitment = () => {
                 <input id="eduction_status" type="text" className="py-2 border border-solid border-[#c7c7c7] outline-none px-2" required={true} />
                 <label htmlFor="ability_description" className="font-[shabnamBold]">شرح توانایی شما (اختیاری)</label>
                 <textarea id="ability_description" className="min-h-[7rem] text-sm outline-none font-[shabnamMedium] p-2"></textarea>
+                <label className="font-[shabnamBold]" htmlFor="card_number">
+                  شماره کارت<span className="text-red-500">*</span>
+                </label>
+                <input id="card_number" type="text" className="py-2 border border-solid border-[#c7c7c7] outline-none px-2" required={true} />
                 <label htmlFor="shaba_number" className="font-[shabnamBold]">
                   شماره شبای کارت بانکی <span className="text-red-500">*</span>
                 </label>

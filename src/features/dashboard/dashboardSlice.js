@@ -13,6 +13,7 @@ import {
   addRole,
   addSefaresh,
   addSeller,
+  addBanner,
   addTag,
   deleteBlog,
   deleteCoupon,
@@ -54,16 +55,21 @@ import {
   updateRole,
   updateUser,
   getSupervisors,
+  choiceEmployee,
+  getBanner,
+  editBanner,
+  deleteBanner,
 } from "./action";
 
 const initialState = {
   content: "categories",
   supervisorsSwitch: "all",
+  bannerSwitch: "all",
   articlesSwitch: "all",
   gallerySwitch: "all",
   productsSwitch: "all",
   rolesSwitch: "all",
-  employeeSwitch: "all",
+  employeeSwitch: "aproval",
   couponSwitch: "all",
   projectSwitch: "all",
   discountSwitch: "all",
@@ -106,13 +112,15 @@ const initialState = {
   editProjectLoading: false,
   galleryLoading: false,
   blogsDeleteLoading: false,
+  bannerLoading: false,
   categories: [],
   blogs: [],
   orders: [],
+  banner: [],
   detailOrders: [],
   gallery: [],
   employee: [],
-  employeesSwitch: "all",
+  employeesSwitch: "approval",
   galleryId: "",
   categoriesLoading: false,
   categoriesError: "",
@@ -198,6 +206,9 @@ const dashboardSlice = createSlice({
           break;
         case "tags":
           state.tagsSwitch = value;
+          break;
+          case "banner":
+          state.bannerSwitch = value;
           break;
         case "coupon":
           state.couponSwitch = value;
@@ -669,15 +680,32 @@ const dashboardSlice = createSlice({
       //getEmployees
       .addCase(getEmployee.fulfilled, (state, action) => {
         state.usersLoading = false;
-        state.employee = action.payload.users.filter(
-          (user) => user.role_id === 6
-        );
-        console.log(state.employee);
+        console.log(action)
+        state.employee = action.payload
+      
       })
       .addCase(getEmployee.pending, (state, action) => {
         state.usersLoading = true;
       })
       .addCase(getEmployee.rejected, (state, action) => {
+        state.usersLoading = false;
+        console.error(action);
+      })
+      .addCase(choiceEmployee.fulfilled, (state, action) => {
+        state.usersLoading = false;
+        if(action.payload.error) {
+          toast.warn(action.payload.error.data?.massage);
+          console.log(action)
+      } else
+      {
+          toast.success(action.payload.data.massage);
+      }
+      
+      })
+      .addCase(choiceEmployee.pending, (state, action) => {
+        state.usersLoading = true;
+      })
+      .addCase(choiceEmployee.rejected, (state, action) => {
         state.usersLoading = false;
         console.error(action);
       })
@@ -764,7 +792,56 @@ const dashboardSlice = createSlice({
         state.sellerLoading = false;
         toast.error("متاسفانه درخواست با مشکل روبرو شد!");
       })
+      // get banner 
+      .addCase(getBanner.fulfilled, (state, action) => {
+        state.bannerLoading = false;
+        state.banner = action.payload.data;
+      })
+      .addCase(getBanner.pending, (state, action) => {
+        state.bannerLoading = true;
+      })
+      .addCase(getBanner.rejected, (state, action) => {
+        state.bannerLoading = false;
+        toast.error("متاسفانه درخواست با مشکل روبرو شد!");
+      })
 
+      .addCase(addBanner.fulfilled, (state, action) => {
+        state.bannerLoading = false;
+        toast.success("درخواست با موفقیت ارسال شد");
+      })
+      .addCase(addBanner.pending, (state, action) => {
+        state.bannerLoading = true;
+      })
+      .addCase(addBanner.rejected, (state, action) => {
+        state.bannerLoading = false;
+        toast.error("متاسفانه درخواست با مشکل روبرو شد!");
+      })
+
+      .addCase(deleteBanner.fulfilled, (state, action) => {
+        state.bannerLoading = false;
+        toast.success("درخواست با موفقیت ارسال شد");
+      })
+      .addCase(deleteBanner.pending, (state, action) => {
+        state.bannerLoading = true;
+      })
+      .addCase(deleteBanner.rejected, (state, action) => {
+        state.bannerLoading = false;
+        toast.error("متاسفانه درخواست با مشکل روبرو شد!");
+      })
+
+      .addCase(editBanner.fulfilled, (state, action) => {
+        state.bannerLoading = false;
+        toast.success("درخواست با موفقیت ارسال شد");
+      })
+      .addCase(editBanner.pending, (state, action) => {
+        state.bannerLoading = true;
+      })
+      .addCase(editBanner.rejected, (state, action) => {
+        state.bannerLoading = false;
+        toast.error("متاسفانه درخواست با مشکل روبرو شد!");
+      })
+
+      
       // get orders
       .addCase(getOrders.fulfilled, (state, action) => {
         state.ordersLoading = false;

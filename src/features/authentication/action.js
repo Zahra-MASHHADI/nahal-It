@@ -28,7 +28,7 @@ export const login = createAsyncThunk(
   async (dataObj) => {
     try {
       const response = await axios.post(
-        "http://api.nahalit.ir/api/v1/users/login",
+        "https://api.nahalit.ir/api/v1/users/login",
         dataObj
       );
       return { data: response.data };

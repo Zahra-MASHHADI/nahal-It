@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import moment from 'moment-jalaali';
 import { updateUserInfo } from '../../../../features/userPanel/action';
+import { choiceEmployee } from '../../../../features/dashboard/action';
+import Cookies from 'js-cookie';
 
 function EmployeeDetails({ setShowDetails , showDetails }) {
     const roles = useSelector(state => state.dashboard.roles);
     const loading = useSelector(state => state.userPanel.isLoading);
+    const userInfo = JSON.parse(Cookies.get("user"));
     const userRole = roles.find(role => role.id === showDetails.role_id)
     const [role,setRole] = useState(userRole?.title);
     let loginDate = showDetails.created_at;
@@ -16,15 +19,10 @@ function EmployeeDetails({ setShowDetails , showDetails }) {
  
     loginDate = moment(loginDate, 'YYYY/MM/DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm:ss');
     updateDate = moment(updateDate, 'YYYY/MM/DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm:ss');
-
-    const changeRole = (title) => {
-        let id = roles.find(Role => Role.title === title)?.id;
-        let dataObj = {
-            ...showDetails,
-            role_id:id
-        };
-        dispatch(updateUserInfo({userId:dataObj.id,dataObj}));
-    }
+function choicerecruitment(status){
+    dispatch(choiceEmployee({user:userInfo.id , status}))
+}
+  
 
   return (
     <div className='p-3 sm:p-10 w-full flex justify-center'>
@@ -69,25 +67,12 @@ function EmployeeDetails({ setShowDetails , showDetails }) {
             <span className='font-semibold text-[#2e424a]'>تاریخ ویرایش:</span>
             <span className='pr-5 font-[shabnamBold]'>{updateDate}</span>
         </div>
-        <div className='flex gap-2'>
-            <span className='font-semibold text-[#2e424a]'>نقش :</span>
-            {
-                loading
-                ?
-                <img src="img/Rolling-0.8s-200px.svg" alt="loading" className='w-[30px]'/>
-                :
-                <select name="roles" value={role} onChange={(e)=>{
-                    setRole(e.target.value)
-                    changeRole(e.target.value)
-                }}>
-                    {
-                        roles?.map(role => (
-                            <option value={role.title}>{role.title}</option>
-                        ))
-                    }
-                </select>
-            }
-        </div>
+        <div class="d-flex align-items-center justify-content-center vh-100">
+    <button class="btn btn-danger btn-lg text-white">Click Me</button>
+    <div className="btn bg-success btn-lg text-white  " onClick={()=> choicerecruitment('accepted')}> تایید برای استخدام </div>
+    <div className="btn btn-danger btn-lg text-white" onClick={()=> choicerecruitment('rejected')}> عدم تایید برای استخدام </div>
+  </div>
+     
     </div>
 </div>
   )

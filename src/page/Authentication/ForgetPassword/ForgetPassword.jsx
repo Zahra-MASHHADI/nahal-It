@@ -26,7 +26,7 @@ function ForgetPassword() {
   const new_password_confirmationRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-console.log(verifyPassword);
+
     useEffect(() => {
         if(redirect)
         {
@@ -42,7 +42,7 @@ console.log(verifyPassword);
         let mobile = phoneRef.current.value;
         let new_password = newPasswordRef.current.value;
         let new_password_confirmation = new_password_confirmationRef.current.value;
-        if(codeSent){
+        if(codeSent && !verifyPassword){
           let code = codeRef.current.value;
           switch(true) {
             case code.length === 0 : toast.warn("کد  را وارد کنید");

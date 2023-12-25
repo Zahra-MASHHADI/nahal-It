@@ -1,11 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { A11y, Autoplay, EffectCards, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getBanner } from "../../features/dashboard/action";
 
 const SliderSwiper = () => {
-  const photoSlider = useSelector(state => state.photoSlider);
-
+  const photoSlider = useSelector(state => state.dashboard.banner);
+  const dispatch = useDispatch()
+useEffect( ()=>{
+  dispatch(getBanner)
+  console.log(photoSlider);
+}
+  ,[])
   return (
     <div className="relative -z-50 max-w-full overflow-hidden">
       <Swiper
@@ -15,30 +21,19 @@ const SliderSwiper = () => {
         slidesPerView={1}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
       >
-        <SwiperSlide>
-          <img
-            className="hover:opacity-80 transition-all duration-300"
-            src={"/img/sliderSwiper1.jpg"}
-            alt="slider_image"
-            width={2000}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="hover:opacity-80 transition-all duration-300"
-            src={"/img/sliderSwiper2.jpg"}
-            alt="slider_image_2"
-            width={2000}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="hover:opacity-80 transition-all duration-300"
-            src={"/img/sliderSwiper3.jpg"}
-            alt="slider_image_3"
-            width={2000}
-          />
-        </SwiperSlide>
+        {photoSlider.map((item , index)=>{
+            return(
+              <SwiperSlide>
+                 <img
+                    className="hover:opacity-80 transition-all duration-300"
+                    src={item.src}
+                    alt="slider_image"{...index}
+                    width={2000}
+                  />
+              </SwiperSlide>
+            )
+        })}
+        
       </Swiper>
     </div>
   );
