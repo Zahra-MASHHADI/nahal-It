@@ -22,6 +22,7 @@ const Article = () => {
 
   const params = useParams();
   const goalId = JSON.parse(params.id);
+
   const articles = useSelector(state => state.articles.articles);
   const goalArticle = articles.find(article => article.id === goalId);
   const dispatch = useDispatch();

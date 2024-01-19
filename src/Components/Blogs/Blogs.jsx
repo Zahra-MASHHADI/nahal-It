@@ -44,8 +44,8 @@ function Blogs({ currentItems }) {
                 {
                     currentItems?.map((article , index) => (
                         <div className='w-[17rem] sm:w-[45%] overflow-hidden rounded-sm justify-between h-[420px] md:w-[30%] lg:w-[23%] 2xl:w-[15%] flex flex-col mb-10' key={index} style={{boxShadow:'0px 0px 10px -6px #000'}}>
-                            <img onClick={() => navigate(`/articles/article/${article.id}`)} src={article.image} alt={article.title} className='hover:brightness-125 max-h-[200px] cursor-pointer transition-all' style={{borderBottom:'1px solid #d7d7d7'}}/>
-                            <Link to={`/articles/article/${article?.id}`} className='py-3 px-2 text-gray-66 font-[shabnamBold] hover:text-gray-88 line-clamp-2 text-base  transition-all'>{article.title}</Link>
+                            <img onClick={() => navigate(`/articles/article/${article.id}/${article.title}`)} src={article.image} alt={article.title} className='hover:brightness-125 max-h-[200px] cursor-pointer transition-all' style={{borderBottom:'1px solid #d7d7d7'}}/>
+                            <Link to={`/articles/article/${article.id}/${article?.title}`} className='py-3 px-2 text-gray-66 font-[shabnamBold] hover:text-gray-88 line-clamp-2 text-base  transition-all'>{article.title}</Link>
                             <div className='text-gray-500 px-2 text-stone-500 font-[shabnamLight] text-xs line-clamp-3 text-justify xl-line-clamp-2  leading-loose'>
                                 <HTMLRenderer html={article.body}/>
                             </div>
@@ -70,7 +70,7 @@ function Blogs({ currentItems }) {
                                 </div>
                                 <button className='flex gap-1 cursor-pointer flex-row w-full text-white  bg-green-bt py-2 px-2 justify-center items-center hover:bg-sky-blue transition-all'>
                                     <TfiMenuAlt className=''/>
-                                    <Link to={`/articles/article/${article?.id}`} className='text-[0.8rem] font-[shabnamBold]'>توضیحات بیشتر</Link>
+                                    <Link to={`/articles/article/${article.id}/${article?.title}`} className='text-[0.8rem] font-[shabnamBold]'>توضیحات بیشتر</Link>
                                 </button>
                             </div>
                         </div>

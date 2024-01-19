@@ -53,7 +53,7 @@ function DetailsOrder(props) {
                                 }
                             </div>
                         </div>
-                        <Link to={`/shop/product/${product.id}`}><button className={showDetails.type !== "completed" ? "hidden" : "bg-blue-500 text-white rounded-sm px-2 py-1 font-[shabnam] hover:bg-blue-400 hover:shadow-md"}>نمایش محصول</button></Link>
+                        <Link to={`/shop/product/${product.id}/${product.title}`}><button className={showDetails.type !== "completed" ? "hidden" : "bg-blue-500 text-white rounded-sm px-2 py-1 font-[shabnam] hover:bg-blue-400 hover:shadow-md"}>نمایش محصول</button></Link>
                     </div>
                 ))
             }

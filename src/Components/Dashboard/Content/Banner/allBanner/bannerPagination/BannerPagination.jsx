@@ -3,8 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBanner } from '../../../../../../features/dashboard/action';
 import { setScrollUp } from '../../../../../../features/dashboard/dashboardSlice';
-import AllArticles from '../AllArticles';
-import AllBanner from '../AllBanner';
+import Banner from '../../Banner';
 
 function BannerPagination() {
     const [itemOffset, setItemOffset] = useState(0);
@@ -16,9 +15,12 @@ function BannerPagination() {
     const currentItems = banner.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(banner.length / itemsPerPage);
     const dispatch = useDispatch();
+    const bannerLoading = useSelector(state => state.dashboard.bannerLoading)
+    console.log(bannerLoading)
     useEffect(()=>{
       dispatch(getBanner())
     },[]);
+   
 
     const handlePageClick = (event) => {
       const newOffset = (event.selected * itemsPerPage) % banner.length;
@@ -37,7 +39,7 @@ function BannerPagination() {
      </div>
      :
      <>
-      <AllBanner currentItems={currentItems} bannersLength={banner?.length}/>
+      <Banner currentItems={currentItems} bannersLength={banner?.length}/>
       <ReactPaginate
       breakLabel="..."
       nextLabel={mobile ? '>>' : "برگه بعدی >>"}

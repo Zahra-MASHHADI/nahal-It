@@ -11,7 +11,9 @@ const initialState = {
     codeSent:false,
     sendCodeLoading:false,
     oneTimeCode : false,
-    verifyPasswordCode :false
+    oneTimeCodeLoading : false,
+    verifyPasswordCode :false,
+    token:''
 }
 
 const authenticationSlice = createSlice({
@@ -40,13 +42,13 @@ const authenticationSlice = createSlice({
             {
                 state.loading = false;
                 state.redirect = true;
-                console.log(action)
+
                 toast.success(action.payload.data.massage)
                 Cookies.set("user",JSON.stringify(action.payload.data.user))
                 localStorage.setItem("access_token",action.payload.data.token)
                 state.loginStatus = true;
             }
-            console.log(action.payload)
+
         })
         .addCase(register.pending,(state) => {
             state.loading = true;
@@ -54,24 +56,24 @@ const authenticationSlice = createSlice({
         .addCase(register.rejected,(state,action) => {
             state.loading = false;
             toast.error("!خطایی در ثبت نام پیش آمده است")
-            console.log(action)
+        
         })
         .addCase(login.fulfilled,(state,action) => {
             if(action.payload.error){
                 state.loading = false;
                 state.redirect = false;
                 toast.warning(action.payload.error.data?.massage)
-                console.log(action)
+       
             }
             else
             {
                 state.loading = false;
                 state.redirect = true;
                 toast.success(action.payload.data?.massage);
-                console.log(action)
                 localStorage.setItem("access_token",action.payload.data.token);
                 Cookies.set("user",JSON.stringify(action.payload.data.user));
                 state.loginStatus = true;
+                state.token = action.payload.data.token
             }
         })
         .addCase(login.pending,(state) => {
@@ -79,41 +81,45 @@ const authenticationSlice = createSlice({
         })
         .addCase(login.rejected,(state,action) => {
             state.loading = false;
-            console.log(action)
         })
         .addCase(forgetPassword.fulfilled,(state,action) => {
+          
             if(action.payload.error) {
+               
                 state.loading = false;
                 toast.warn(action.payload.error.data.message);
                 state.redirect = false;
             }
             else
             {
+           
                 state.loading = false;
                 toast.success(action.payload.data.massage);
                 state.redirect = true;
             }
         })
         .addCase(forgetPassword.pending,(state) => {
+           
             state.loading = true;
         })
         .addCase(forgetPassword.rejected,(state,action) => {
+           
             state.loading = false;
             state.redirect = false;
-            console.log(action)
+       
         })
         .addCase(sendCode.fulfilled,(state,action) => {
             state.sendCodeLoading = false;
             if(action.payload.error) {
                 toast.warn(action.payload.error.data?.massage);
                 state.codeSent = false;
-                console.log(action)
+ 
             }
             else
             {
                 toast.success(action.payload.data.massage);
                 state.codeSent = true;
-                console.log(action);
+         
             }
         })
         .addCase(sendCode.pending,(state) => {
@@ -122,20 +128,20 @@ const authenticationSlice = createSlice({
         .addCase(sendCode.rejected,(state,action) => {
             state.sendCodeLoading = false;
             state.codeSent = false;
-            console.log(action)
+    
         })
         .addCase(verifyCode.fulfilled,(state,action) => {
             state.sendCodeLoading = false;
             if(action.payload.error) {
                 toast.warn(action.payload.error.data?.massage);
-                console.log(action)
+      
             }
             else
             {
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
                 state.redirect = true;
-                console.log(action);
+         
             }
         })
         .addCase(verifyCode.pending,(state) => {
@@ -144,41 +150,38 @@ const authenticationSlice = createSlice({
         })
         .addCase(verifyCode.rejected,(state,action) => {
             state.sendCodeLoading = false;
-        
+            state.oneTimeCode = false;
         })
         
         .addCase(loginCode.fulfilled, (state, action) => {
-            state.sendCodeLoading = false;
+            state.oneTimeCodeLoading = false;
             if (action.payload.error) {
          
                 toast.warn(action.payload.error.data?.massage);
-                state.codeSent = false;
-                state.oneTimeCode = true;
+                state.oneTimeCode = false;
             
             } else {
              
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
-                state.codeSent = true;
                 state.oneTimeCode = true;
-                console.log(state.token);
                 state.token = action.payload.data.token; 
                
             }
         })
         .addCase(loginCode.pending, (state) => {
-            state.sendCodeLoading = true;
+            state.oneTimeCodeLoading = true;
+            state.oneTimeCode = false;
         })
         .addCase(loginCode.rejected, (state, action) => {
-            state.sendCodeLoading = false;
-            state.codeSent = false;
+            state.oneTimeCodeLoading = false;
+            state.oneTimeCode = false;
    
         })
         .addCase(verifyOneTimeCode.fulfilled,(state,action) => {
-            state.sendCodeLoading = false;
+            state.oneTimeCodeLoading = false;
             if(action.payload.error) {
                 toast.warn(action.payload.error.data?.massage);
-                console.log(action)
             }
             else
             {
@@ -187,39 +190,37 @@ const authenticationSlice = createSlice({
                 state.redirect = true;
                 localStorage.setItem("access_token",action.payload.data.token);
                 state.loginStatus = true;
+                state.oneTimeCode = false;
             }
         })
         .addCase(verifyOneTimeCode.pending,(state) => {
-            state.sendCodeLoading = true;
+            state.oneTimeCodeLoading = true;
             state.redirect = false;
         })
         .addCase(verifyOneTimeCode.rejected,(state,action) => {
-            state.sendCodeLoading = false;
-            console.log(action)
+            state.oneTimeCodeLoading = false;
+          
         })
         .addCase(verifyPasswordCode.fulfilled,(state,action) => {
-            state.sendCodeLoading = false;
+            state.oneTimeCodeLoading = false;
             if(action.payload.error) {
                 toast.warn(action.payload.error.data?.massage);
-                console.log(action)
             }
             else
             {
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
-                state.redirect = true;
                 state.verifyPasswordCode = true;
                 localStorage.setItem("access_token",action.payload.data.token);
-                console.log(action);
+                state.oneTimeCode = false;
             }
         })
         .addCase(verifyPasswordCode.pending,(state) => {
-            state.sendCodeLoading = true;
-            state.redirect = false;
+            state.oneTimeCodeLoading = true;
         })
         .addCase(verifyPasswordCode.rejected,(state,action) => {
-            state.sendCodeLoading = false;
-            console.log(action)
+            state.oneTimeCodeLoading = false;
+        
             state.verifyPasswordCode = false;
         });
     }

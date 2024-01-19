@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateUserInfo , changeUserPassword } from "./action";
+import { updateUserInfo , changeUserPassword, changeUserRole } from "./action";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
@@ -34,6 +34,24 @@ const userPanelSlice = createSlice({
             state.isLoading = false;
             toast.error("خطا در ویرایش اطلاعات")
             console.error(action.error)
+        })
+        .addCase(changeUserRole.fulfilled, (state,action) => {
+            state.isLoading = false; 
+            if(action.payload.error){
+                toast.error(action.payload.error.data.massage)
+            }
+            else {
+                console.log(action)
+                toast.success(action.payload.data.massage)
+            }
+        })
+        .addCase(changeUserRole.pending, (state,action) => {
+         
+            state.isLoading = true; 
+        })
+        .addCase(changeUserRole.rejected, (state,action) => {
+            state.isLoading = false; 
+            console.error(action)
         })
         .addCase(changeUserPassword.fulfilled, (state,action) => {
             state.isLoading = false; 

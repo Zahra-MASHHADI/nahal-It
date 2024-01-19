@@ -8,7 +8,6 @@ import OrdersPagination from "../../Content/Orders/OrdersPagination/OrdersPagina
 import Products from "../../Content/Products/Products";
 import Projects from "../../Content/Projects/Projects";
 import Roles from "../../Content/Roles/Roles";
-import SellersPagination from "../../Content/Sellers/SellersPagination/SellersPagination";
 import Tags from "../../Content/Tags/Tags";
 import UsersPagination from "../../Content/Users/UsersPagination/UsersPagination";
 import News from "../../Content/News/News";
@@ -16,7 +15,8 @@ import Links from "../../Content/Links/Links";
 import EmployeesPagination from "../../Content/Employees/EmployeesPagination";
 
 import SupervisorsPagination from "../../Content/supervisors/SupervisorsPagination";
-import Banner from "../../Content/Banner/Banner";
+import BannerPagination from "../../Content/Banner/allBanner/bannerPagination/BannerPagination";
+import WorkSamples from "../../Content/WorkSamples/WorkSamples";
 
 function ContentDash() {
   const [currentContent, setCurrentContent] = useState(null);
@@ -56,9 +56,6 @@ function ContentDash() {
       case "discount":
         setCurrentContent(<Discount />);
         break;
-      case "sellers":
-        setCurrentContent(<SellersPagination />);
-        break;
       case "coupon":
         setCurrentContent(<Coupons />);
         break;
@@ -69,11 +66,14 @@ function ContentDash() {
         setCurrentContent(<News />);
         break;
         case "banner":
-          setCurrentContent(<Banner />);
+          setCurrentContent(<BannerPagination />);
           break;
       case "links":
         setCurrentContent(<Links />);
         break;
+        case "worksample":
+          setCurrentContent(<WorkSamples />);
+          break;
       default:
         setCurrentContent("این بخش وجود ندارد");
     }

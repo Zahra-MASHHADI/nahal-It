@@ -71,7 +71,7 @@ function ProductsPage({currentItems}) {
                 {
                 currentItems?.map((product) => (
                     <>
-                    <div key={product?.id} className='w-[20rem] z-0 3xl:w-[18%] 2xl:w-[25%] sm:w-[45%] md:w-[30%] lg:w-[28%] flex justify-between flex-col sm:gap-1  relative bg-stone-200 rounded-md overflow-hidden' style={{boxShadow: '0px 0px 5px 0px #919191'}}>
+                    <Link to={`/shop/product/${product.id}/${product.title}`}  key={product?.id} className='w-[20rem] z-0 3xl:w-[18%] 2xl:w-[25%] sm:w-[45%] md:w-[30%] lg:w-[28%] flex justify-between flex-col sm:gap-1  relative bg-stone-200 rounded-md overflow-hidden' style={{boxShadow: '0px 0px 5px 0px #919191'}}>
                         {
                             discountIds.includes(product?.id)
                             ?
@@ -133,11 +133,11 @@ function ProductsPage({currentItems}) {
                                 <span className='text-yellow-800 font-[shabnamBold]'>تومان</span>
                             </div>
                         }
-                        <Link to={`/shop/product/${product.id}`} className='flex items-center mx-3 mb-3 bg-lime-600 hover:bg-lime-500 transition-all duration-300 justify-center gap-1 text-white py-1 text-sm font-bold rounded-md'>
+                        <Link to={`/shop/product/${product.id}/${product.title}`} className='flex items-center mx-3 mb-3 bg-lime-600 hover:bg-lime-500 transition-all duration-300 justify-center gap-1 text-white py-1 text-sm font-bold rounded-md'>
                             <FaShoppingBag/>
                             <span className='font-[shabnamBold]'>خرید محصول</span>
                         </Link>
-                    </div>              
+                    </Link>              
                     </>
                 ))
                 }

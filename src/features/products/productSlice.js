@@ -141,14 +141,13 @@ const productsSlice = createSlice({
             state.minPrice = state.FilteredProducts.reduce((min , item) => Math.min(min , item.price), Infinity);
         },
         deleteAllFilters : (state) => {
+            console.log(state)
+            return {
+                ...state,
+                FilteredProducts: state.products
 
-            if(state.categorySearch){
-                state.FilteredProducts = state.productsCate;
-            }
-            else
-            {
-                state.FilteredProducts = state.products;
-            }
+              };
+          
         },
     },
     extraReducers : builder => {

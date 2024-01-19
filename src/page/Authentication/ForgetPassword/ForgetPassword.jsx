@@ -17,7 +17,7 @@ import SendCodeTimer from '../ConfirmNumberPage/SendCodeTimer/SendCodeTimer';
 function ForgetPassword() {
   const loading = useSelector(state => state.authentication.loading);
   const redirect = useSelector(state => state.authentication.redirect);
-  const codeSent = useSelector(state => state.authentication.codeSent);
+  const codeSent = useSelector(state => state.authentication.oneTimeCode);
   const verifyPassword = useSelector(state => state.authentication.verifyPasswordCode);
   const phoneRef = useRef();
   const codeRef = useRef();
@@ -36,6 +36,31 @@ function ForgetPassword() {
           dispatch(changeRedirect())
         }
       },[redirect]);
+      useEffect(() => {
+       if(verifyPassword){
+        let mobile = phoneRef.current.value;
+        let new_password = newPasswordRef.current.value;
+        let new_password_confirmation = new_password_confirmationRef.current.value;
+        switch(true)
+        {
+          case mobile.length === 0 : toast.warn('شماره تلفن را وارد کنید');
+          break;
+          case mobile.length < 11 : toast.warn('شماره تلفن کوتاه است');
+          break;
+          case new_password.length === 0 : toast.warn('رمز عبور را وارد کنید');
+          break;
+          case new_password.length < 8 : toast.warn('رمز عبور کوتاه است');
+          break;
+          case new_password.search(/\D+/g) === -1 || new_password.search(/\d+/g) === -1 : toast.warn('رمز عبور باید ترکیبی از اعداد و حروف باشد')
+          break; 
+          case new_password_confirmation.length === 0 : toast.warn('تکرار رمز عبور را وارد کنید');
+          break;
+          case new_password !== new_password_confirmation : toast.warn('تکرار رمز عبور تطابق ندارد');
+          break;
+          default : formSubmitter({mobile,new_password,new_password_confirmation});
+        }
+       }
+      },[verifyPassword]);
 
     const changePassword = (e) => {
         e.preventDefault()
@@ -52,7 +77,7 @@ function ForgetPassword() {
             default : verifyCodeFnc({mobile , code})
       
           }
-        }else{
+        }else if(!codeSent && !verifyPassword){
           switch(true) {
             case mobile.length === 0 : toast.warn("شماره تلفن را وارد کنید");
             break;
@@ -73,31 +98,14 @@ function ForgetPassword() {
             default : loginFnc({mobile})
       
           }
-        }
+        }else
         if(verifyPassword){
-          switch(true)
-          {
-            case mobile.length === 0 : toast.warn('شماره تلفن را وارد کنید');
-            break;
-            case mobile.length < 11 : toast.warn('شماره تلفن کوتاه است');
-            break;
-            case new_password.length === 0 : toast.warn('رمز عبور را وارد کنید');
-            break;
-            case new_password.length < 8 : toast.warn('رمز عبور کوتاه است');
-            break;
-            case new_password.search(/\D+/g) === -1 || new_password.search(/\d+/g) === -1 : toast.warn('رمز عبور باید ترکیبی از اعداد و حروف باشد')
-            break; 
-            case new_password_confirmation.length === 0 : toast.warn('تکرار رمز عبور را وارد کنید');
-            break;
-            case new_password !== new_password_confirmation : toast.warn('تکرار رمز عبور تطابق ندارد');
-            break;
-            default : formSubmitter({mobile,new_password,new_password_confirmation});
-          }
         }
         
       };
 
       const formSubmitter = (dataObj) => {
+
         dispatch(forgetPassword(dataObj))
       }
       const verifyCodeFnc = (dataObj) => {

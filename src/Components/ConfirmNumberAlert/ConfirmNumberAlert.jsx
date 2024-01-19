@@ -7,9 +7,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 function ConfirmNumberAlert() {
   const loginStatus = useSelector(state => state.authentication.loginStatus);
-  const mobileVerify = Cookies.get('user') ? JSON.parse(Cookies.get('user'))?.mobile_verify : null;
+  const verifyPassword = useSelector(state => state.authentication.verifyPasswordCode);
+  const mobileVerify = !verifyPassword && Cookies.get('user') ? JSON.parse(Cookies.get('user'))?.mobile_verify : null;
   const location = useLocation();
   const pathName = location.pathname;
+ 
 
   return (
     <>

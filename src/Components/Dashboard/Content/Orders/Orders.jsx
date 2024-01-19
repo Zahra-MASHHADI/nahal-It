@@ -1,7 +1,12 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { BiSolidBadgeDollar } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+import { getDetailOrders } from '../../../../features/dashboard/action';
 
-function Orders({ currentItems  , setShowDetails , users }) {
+function Orders({ currentItems  , setShowDetails , users , showDetails }) {
+
+  const dispatch = useDispatch();
 
   function separateByCommas(number) {
       let numberString = String(number);
@@ -27,7 +32,12 @@ function Orders({ currentItems  , setShowDetails , users }) {
     <div className='w-full flex flex-row flex-wrap justify-center md:flex-col gap-3 items-center'>
       {
         currentItems.map((order,index) => (
-          <div key={index} className='bg-[#ffffffb4] flex-col md:flex-row gap-y-3 w-[15rem] md:w-full rounded-sm transition-all text-sm  hover:brightness-95 py-5 px-3 font-[shabnambold] flex items-center justify-between' onClick={()=>setShowDetails({status:true,value:order})}>
+          <div key={index} className='bg-[#ffffffb4] flex-col md:flex-row gap-y-3 w-[15rem] md:w-full rounded-sm transition-all text-sm  hover:brightness-95 py-5 px-3 font-[shabnambold] flex items-center justify-between'
+           onClick={()=>{
+            setShowDetails({status:true,value:order})
+            dispatch(getDetailOrders(order.id))
+          }
+            }>
               <span className='bg-stone-400 px-5 py-2 md:p-2 rounded-md'>{index+1}</span>
               <div className='flex items-center gap-1'>
                 <span className='font-[shabnamBold]'>{users.find(user => user.id === order.user_id)?.first_name}</span>

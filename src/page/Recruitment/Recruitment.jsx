@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { DatePicker } from "zaman";
@@ -9,14 +9,18 @@ import ResponseHeader from "../../Components/ResponseHeader/ResponseHeader";
 import { toast } from "react-toastify";
 import { sendRecruitment } from "../../features/recruitment/action";
 import Cookies from "js-cookie";
+import NotLogined from "../../Components/NotLogined/NotLogined";
 
 const Recruitment = () => {
-  const userInfo = JSON.parse(Cookies.get("user"));
+  const loginStatus = useSelector(state => state.authentication.loginStatus);
+  const token = useSelector(state => state.authentication.token);
+  const tokens = useSelector(state => state.recruitment.token);
   const loading = useSelector(state => state.recruitment.loading);
   const [birthDate,setBirthDate] = useState('');
   const dispatch = useDispatch();
 
   const formSubmit = e => {
+    const userInfo = JSON.parse(Cookies.get("user"));
     e.preventDefault();
     let dataObj = {};
     Array.from(e.target.elements).forEach(element => {
@@ -40,8 +44,17 @@ const Recruitment = () => {
       toast.warn("تاریخ تولد را وارد کنید")
     }
   }
-
+  useEffect(()=>{
+      const storedToken = localStorage.getItem('access_token');
+       const test = Cookies.get("user");
+      console.log(localStorage)
+      console.log(storedToken)
+      console.log(tokens)
+      console.log(test)
+  },[])
   return (
+    <>
+   
     <div>
       <header>
         <div className="max-lg:hidden">
@@ -93,6 +106,7 @@ const Recruitment = () => {
             </Link>
           </div>
           <div>
+          {loginStatus ?
             <form onSubmit={(e)=>formSubmit(e)} className="flex flex-col px-3 justify-center w-[35rem] max-xl:w-[25rem] max-lg:w-[20rem] gap-y-2">
               <label htmlFor="first_name" className="font-[shabnamBold]">
                 نام شما <span className="text-red-500">*</span>
@@ -191,6 +205,9 @@ const Recruitment = () => {
                 </button>
             </div>
             </form>
+             :
+             <NotLogined/>
+            }
           </div>
         </div>
       </div>
@@ -201,6 +218,7 @@ const Recruitment = () => {
         <Footer />
       </footer>
     </div>
+   </>
   );
 };
 

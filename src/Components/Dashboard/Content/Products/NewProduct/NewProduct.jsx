@@ -8,12 +8,14 @@ import Editor from '../../../../Editor/Editor';
 
 function NewProduct() {
     const [imageName,setImageName] = useState('');
+    const [fileName,setFileName] = useState('');
     const [desc,setDesc] = useState('');
     const [priceValue,setPriceValue] = useState('0');
     const [dropCate,setDropCate] = useState({status:false,value:null,id:null})
     const userId = JSON.parse(Cookies.get("user")).id;
     const titleRef = useRef();
     const imageRef = useRef();
+    const fileRef = useRef();
     const dispatch = useDispatch();
     const loading = useSelector(state => state.dashboard.productsLoading);
 
@@ -48,6 +50,7 @@ function NewProduct() {
         const form = {
             title:titleRef.current.value,
             image:imageName,
+            file:fileName,
             category_id:dropCate.id,
             price:JSON.parse(priceValue.replaceAll(',','')),
             description:desc,
@@ -61,6 +64,8 @@ function NewProduct() {
             case form.title.length < 3 : toast.warn("عنوان کوتاه است");
             break;
             case imageName === '' : toast.warn('فایل تصویر را وارد کنید');
+            break;
+            case fileName === '' : toast.warn('فایل محصول را وارد کنید');
             break;
             case form.description.length === 0 : toast.warn("توضیح را وارد کنید");
             break;
@@ -81,6 +86,7 @@ function NewProduct() {
             formdata.append("seller_id", form.seller_id );
             formdata.append("price", form.price);
             formdata.append("image", form.image , `${imageRef.current.value}`);
+            formdata.append("file", form.file , `${fileRef.current.value}`);
             dispatch(addProduct(formdata))
     }
 
@@ -103,6 +109,13 @@ function NewProduct() {
                 <input onChange={(e)=>{
                     setImageName(e.target.files[0])
                 }} type="file" ref={imageRef} className='p-1 outline-[#0ab694] w-full text-left' required={true} name='image'/>
+            </div>
+                {/* file */}
+                <div className='flex flex-col gap-2 w-full'>
+                <label htmlFor="file" className='font-semibold text-[#2e424a]'> فایل محصول را با فرمت zip انتخاب کنید</label>
+                <input onChange={(e)=>{
+                    setFileName(e.target.files[0])
+                }} type="file" ref={fileRef} className='p-1 outline-[#0ab694] w-full text-left' required={true} name='file'/>
             </div>
                {/* describe */}
             <Editor setDesc={setDesc}/>

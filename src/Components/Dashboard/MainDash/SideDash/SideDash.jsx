@@ -35,6 +35,7 @@ function SideDash({ dropMenu, setDropMenu }) {
   const [gRotate, setGRotate] = useState(false);
   const [rRotate, setRRotate] = useState(false);
   const [wRotate, setWRotate] = useState(false);
+  const [wsRotate, setWsRotate] = useState(false);
   const [dRotate, setDRotate] = useState(false);
   const [coRotate, setCoRotate] = useState(false);
   const [tRotate, setTRotate] = useState(false);
@@ -43,6 +44,7 @@ function SideDash({ dropMenu, setDropMenu }) {
   const [bRotate, setBRotate] = useState(false);
   const content = useSelector((state) => state.dashboard.content);
   const aCriterion = useSelector((state) => state.dashboard.articlesSwitch);
+  const wsCriterion = useSelector((state) => state.dashboard.worksampleSwitch);
   const eCriterion = useSelector((state) => state.dashboard.employeesSwitch);
   const pCriterion = useSelector((state) => state.dashboard.productsSwitch);
   const gCriterion = useSelector((state) => state.dashboard.gallerySwitch);
@@ -76,6 +78,7 @@ function SideDash({ dropMenu, setDropMenu }) {
         eRotate |
         nRotate |
         bRotate |
+        wsRotate |
         lRotate &&
       value !== "articles"
     ) {
@@ -92,6 +95,7 @@ function SideDash({ dropMenu, setDropMenu }) {
       setLRotate(false);
       setERotate(false);
       setBRotate(false);
+      setWsRotate(false);
     } else if (
       pRotate |
         cRotate |
@@ -105,6 +109,7 @@ function SideDash({ dropMenu, setDropMenu }) {
         nRotate |
         eRotate |
         bRotate |
+        wsRotate |
         lRotate &&
       value !== "products"
     ) {
@@ -121,6 +126,7 @@ function SideDash({ dropMenu, setDropMenu }) {
       setLRotate(false);
       setERotate(false);
       setBRotate(false);
+      setWsRotate(false);
     }
   };
 
@@ -621,6 +627,57 @@ function SideDash({ dropMenu, setDropMenu }) {
         <div className="w-full flex flex-col items-center">
           <div
             onClick={() => {
+              listSwitch("worksample");
+              setWsRotate(!wsRotate);
+              dispatch(setSwitch({ key: "worksample", value: "all" }));
+            }}
+            style={{ backgroundColor: content === "worksample" ? "#232c38" : "" }}
+            className="flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300"
+          >
+            <RiCoupon3Fill className="bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]" />
+            <li className="text-white font-bold text-lg  text-center">نمونه کار</li>
+            <MdOutlineArrowLeft
+              className="text-white w-[1.5rem] h-[1.5rem] transition-all duration-300"
+              style={{ rotate: wsRotate ? "-90deg" : "0deg" }}
+            />
+          </div>
+          <div
+            className="flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400"
+            style={{
+              height: wsRotate ? "fit-content" : "0px",
+              padding: wsRotate ? "10px" : "0px",
+              overflow: wsRotate ? "" : "hidden",
+              visibility: wsRotate ? "visible" : "hidden",
+              marginTop: wsRotate ? "1rem" : "0px",
+            }}
+          >
+            <button
+              className="font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1"
+              onClick={() =>
+                dispatch(setSwitch({ key: "worksample", value: "all" }))
+              }
+              style={{
+                backgroundColor: wsCriterion === "all" ? "#ffffff4d" : "",
+              }}
+            >
+              همه
+            </button>
+            <button
+              className="font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1"
+              onClick={() =>
+                dispatch(setSwitch({ key: "worksample", value: "new" }))
+              }
+              style={{
+                backgroundColor: wsCriterion === "new" ? "#ffffff4d" : "",
+              }}
+            >
+              ایجاد
+            </button>
+          </div>
+        </div>
+        <div className="w-full flex flex-col items-center">
+          <div
+            onClick={() => {
               listSwitch("tags");
               setTRotate(!tRotate);
               dispatch(setSwitch({ key: "tags", value: "all" }));
@@ -673,7 +730,7 @@ function SideDash({ dropMenu, setDropMenu }) {
               setBRotate(!bRotate);
               dispatch(setSwitch({ key: "banner", value: "all" }));
             }}
-            style={{ backgroundColor: content === "coupon" ? "#232c38" : "" }}
+            style={{ backgroundColor: content === "banner" ? "#232c38" : "" }}
             className="flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300"
           >
             <RiCoupon3Fill className="bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]" />
@@ -770,19 +827,6 @@ function SideDash({ dropMenu, setDropMenu }) {
             </button>
           </div>
         </div>
-        <div
-          onClick={() => {
-            listSwitch("sellers");
-          }}
-          style={{ backgroundColor: content === "sellers" ? "#232c38" : "" }}
-          className="flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300"
-        >
-          <BsPersonBoundingBox className="bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]" />
-          <li className="text-white font-bold text-lg  text-center">
-            فروشنده ها
-          </li>
-          <div className="w-[1.5rem] h-[1.5rem]"></div>
-        </div>
         <hr className="w-full h-[3rem] py-1 border-none" />
       </ul>
     </div>
@@ -791,4 +835,4 @@ function SideDash({ dropMenu, setDropMenu }) {
 
 export default SideDash;
 
-// bg-[#28323d]
+

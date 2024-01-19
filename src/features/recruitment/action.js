@@ -16,10 +16,12 @@ export const sendRecruitment = createAsyncThunk('recruitment/sendRecruitment', a
                  },
              }
          );
- 
+             console.log(response)
+             
          return { data: response.data };
      } catch (axiosError) {
          let err = axiosError;
+         
          return {
              error: {
                  status: err.response?.status,

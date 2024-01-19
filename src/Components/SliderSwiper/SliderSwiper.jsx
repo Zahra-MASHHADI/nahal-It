@@ -8,7 +8,7 @@ const SliderSwiper = () => {
   const photoSlider = useSelector(state => state.dashboard.banner);
   const dispatch = useDispatch()
 useEffect( ()=>{
-  dispatch(getBanner)
+  dispatch(getBanner())
   console.log(photoSlider);
 }
   ,[])
@@ -26,7 +26,7 @@ useEffect( ()=>{
               <SwiperSlide>
                  <img
                     className="hover:opacity-80 transition-all duration-300"
-                    src={item.src}
+                    src={`${item?.image}`}
                     alt="slider_image"{...index}
                     width={2000}
                   />

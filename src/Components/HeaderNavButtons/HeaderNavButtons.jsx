@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom';
 function HeaderNavButtons({ loginStatus , roleId }) {
   return (
     <div className="flex items-center justify-center xl:gap-x-3 lg:gap-x-3">
-        <Link to={"/be_seller"} className="flex flex-row-reverse items-center justify-center py-2 px-1 xl:px-3 rounded-md bg-[#57C053] hover:bg-[#62d15e] text-white gap-x-2" style={{boxShadow:'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'}}>
-        <span className="text-sm font-[shabnamMedium] tracking-tight">فروشنده باشید</span>
-        <FaSpa className="text-base" />
-        </Link>
         {
         loginStatus
         ?
@@ -24,7 +20,7 @@ function HeaderNavButtons({ loginStatus , roleId }) {
         {
         roleId !== '' && roleId === 1
         ?
-        <Link to={'/dashboard'} className="flex flex-row-reverse w-[7rem] min-w-fit items-center justify-center py-2 px-1 xl:px-3 rounded-md bg-[#57C053] hover:bg-[#62d15e] text-white gap-x-2" style={{boxShadow:'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'}}>
+        <Link to={'/dashboard'} className="flex flex-row-reverse w-[7rem] min-w-fit items-center justify-center py-2 px-1 rounded-md bg-[#57C053] hover:bg-[#62d15e] text-white gap-x-2" style={{boxShadow:'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'}}>
         <span className="text-sm font-[shabnamMedium] tracking-tight">پنل مدیریت</span>
         <AiFillDashboard className="text-lg" />
         </Link>

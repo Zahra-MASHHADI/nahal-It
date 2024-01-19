@@ -6,7 +6,7 @@ function SearchResultItem({ data , deviceSize , type }) {
   const navigate = useNavigate();
   const transport = () => {
     if(type === "blog") {
-      navigate(`/articles/article?id=${data.id}`)
+      navigate(`article?id=${data.id}`)
     }else {
       navigate(`/shop/product/${data.id}`)
     }

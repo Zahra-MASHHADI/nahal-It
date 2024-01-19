@@ -10,7 +10,7 @@ function OrdersPagination() {
     const [showDetails,setShowDetails] = useState({status:false,value:''});
     const [itemOffset, setItemOffset] = useState(0);
     const orders = useSelector(state => state.dashboard.orders);
-    const orderDetail = useSelector(state => state.dashboard.detailOrders)
+
     const users = useSelector(state => state.dashboard.users);
     const loading = useSelector(state => state.dashboard.ordersLoading);
     const dispatch = useDispatch();
@@ -29,12 +29,7 @@ function OrdersPagination() {
       dispatch(getOrders())
       dispatch(getUsers())
     },[])
-    useEffect(() => {
-      if(showDetails.status){
-      dispatch(getDetailOrders(showDetails.value.id))
-      
-      }
-    },[showDetails])
+
       return (
         <>
          {
@@ -47,7 +42,7 @@ function OrdersPagination() {
               !showDetails.status
               ?
               <>
-              <Orders currentItems={currentItems} setShowDetails={setShowDetails} users={users}/>
+              <Orders currentItems={currentItems} setShowDetails={setShowDetails} users={users} showDetails={showDetails}/>
               <ReactPaginate
               breakLabel="..."
               nextLabel={mobile ? '>>' : "برگه بعدی >>"}
@@ -63,7 +58,7 @@ function OrdersPagination() {
               />
               </>
               :
-              <Details details={showDetails} setShowDetails={setShowDetails} users={users} orderDetail={orderDetail}/>
+              <Details details={showDetails} setShowDetails={setShowDetails} users={users}/>
           }
           </>
          }

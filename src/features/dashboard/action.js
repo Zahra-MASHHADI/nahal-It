@@ -48,12 +48,25 @@ export const setSupervisorProjects = createAsyncThunk(
   "dashboard/setSupervisorProjects",
   async ({ user_id, project_id }) => {
     const res = await instance.get(
-      `/supervisors/setSupervisorProject/${user_id}/${project_id}`
+      `/setSupervisorProject/${user_id}/${project_id}`
     );
 
     const { data } = res;
 
     console.log(data);
+  }
+);
+
+export const getSupervisorProjects = createAsyncThunk(
+  "dashboard/getSupervisorProjects",
+  async (user_id) => {
+    const response = await instance.get(
+      `/getSupervisorProjects/${user_id}`
+    );
+
+    const { data } = response;
+
+return data.projects
   }
 );
 
@@ -427,7 +440,7 @@ export const getDetailOrders = createAsyncThunk(
 );
 // banner 
 export const getBanner = createAsyncThunk("dashboard/getBanner", async () => {
-  const response = await instance.get("");
+  const response = await instance.get("/banners");
   const { data } = response;
   return data;
 });
@@ -439,12 +452,12 @@ export const addBanner = createAsyncThunk("dashboard/addBanner", async (dataObj)
 });
 
 export const deleteBanner = createAsyncThunk("dashboard/deleteBanner", async (id) => {
-  const response = await instance.post(`/banners/${id}`);
+  const response = await instance.delete(`/banners/${id}`);
   const { data } = response;
   return data;
 });
 export const editBanner = createAsyncThunk("dashboard/editBanner", async (id , dataObj) => {
-  const response = await instance.post(`/banners/${id}?method=PATCH` , dataObj);
+  const response = await instance.post(`/banners/${id}?_method=PATCH` , dataObj);
   const { data } = response;
   return data;
 });
@@ -501,6 +514,7 @@ export const deletingTag = createAsyncThunk(
 
 // links
 export const getLinks = createAsyncThunk("dashboard/getLinks", async () => {
+  
   const response = await instance.get(`/sources`);
   const { data } = response;
   return data;
@@ -526,6 +540,113 @@ export const getPhotoSlider = createAsyncThunk(
   "dashboard/getPhotoSlider",
   async () => {
     const response = await instance.get(`/images`);
+    const { data } = response;
+    return data;
+  }
+);
+
+//work sample
+export const getWorkSampleCategories = createAsyncThunk(
+  "dashboard/workSampleCategories",
+  async () => {
+    const response = await instance.get(`/workSampleCategories`);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const getWorkSample = createAsyncThunk(
+  "dashboard/workSample",
+  async () => {
+    const response = await instance.get(`/workSamples`);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const getWorkSampleDetail = createAsyncThunk(
+  "dashboard/getWorkSampleDetail",
+  async (id) => {
+    const response = await instance.get(`/workSamples/${id}`);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const getworkSampleGalleries = createAsyncThunk(
+  "dashboard/getworkSampleGalleries",
+  async () => {
+    const response = await instance.get(`/workSampleGalleries`);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const getworkSampleGalleriesDetail = createAsyncThunk(
+  "dashboard/getworkSampleGalleriesDetail",
+  async (id) => {
+    const response = await instance.get(`/workSampleGalleries/${id} `);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const addWorkSampleCategories = createAsyncThunk(
+  "dashboard/addWorkSampleCategories",
+  async (obj) => {
+    const response = await instance.post(`/workSampleCategories` , obj);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const deleteWorkSampleCategories = createAsyncThunk(
+  "dashboard/deleteWorkSampleCategories",
+  async (id) => {
+    const response = await instance.delete(`/workSampleCategories/${id} `);
+    const { data } = response;
+    return data;
+  }
+);
+export const addWorkSample = createAsyncThunk(
+  "dashboard/addWorkSamples",
+  async (obj) => {
+    const response = await instance.post(`/workSamples` , obj);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const editWorkSample = createAsyncThunk(
+  "dashboard/editWorkSamples",
+  async (obj) => {
+    const response = await instance.patch(`/workSamples/${obj.id} ` , obj);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const deleteWorkSample = createAsyncThunk(
+  "dashboard/deleteWorkSamples",
+  async (id) => {
+    const response = await instance.delete(`/workSamples/${id} `);
+    const { data } = response;
+    return data;
+  }
+);
+
+export const addworkSampleGalleries  = createAsyncThunk(
+  "dashboard/addworkSampleGalleries",
+  async (obj) => {
+    const response = await instance.post("/workSampleGalleries" , obj);
+   
+    return response;
+  }
+);
+export const deleteworkSampleGalleries  = createAsyncThunk(
+  "dashboard/deleteworkSampleGalleries",
+  async (id) => {
+    const response = await instance.delete(`/workSampleGalleries/${id}`);
     const { data } = response;
     return data;
   }

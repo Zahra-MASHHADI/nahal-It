@@ -19,19 +19,31 @@ export default function EmployeesPagination(){
     const pageCount = Math.ceil(employees.length / itemsPerPage);
   const [innerComponent,setInnerComponent] = useState(<></>);
     const Criterion = useSelector(state=> state.dashboard.employeesSwitch);
-   console.log(employees)
+ 
     const [items, setItems] = useState([]);
     useEffect(()=>{
         switch(Criterion)
         {
-            case 'unapproval' :  setItems(currentItems.filter(item => item.status === 'waiting')) ;
+            case 'unapproval' :  setItems(employees.filter(item => item.status === 'waiting')) ;
             break;
-            case 'approval' :    setItems(currentItems.filter(item => item.status === 'accepted'));
+            case 'approval' :    setItems(employees.filter(item => item.status === 'accepted'));
             ;
             break;
             default : setInnerComponent(<></>)
         }
-    },[Criterion])
+    },[Criterion , employees])
+    useEffect(()=>{
+      console.log(Criterion);
+      switch(Criterion)
+      {
+          case 'unapproval' :  setItems(employees.filter(item => item.status === 'waiting')) ;
+          break;
+          case 'approval' :    setItems(employees.filter(item => item.status === 'accepted'));
+          ;
+          break;
+          default : setInnerComponent(<></>)
+      }
+  },[])
 console.log(items);
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -40,6 +52,7 @@ console.log(items);
 
     useEffect(() => {
       dispatch(getEmployee())
+
     },[])
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % employees.length;

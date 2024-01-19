@@ -66,6 +66,12 @@ import NewsPage from "./page/NewsPage/NewsPage";
 import OneTimeCode from "./page/Authentication/Login/oneTimeCode/oneTimeCode.jsx";
 import UserProjects from "./page/UserPanel/UserProjects.jsx";
 import ProjectPagination from "./Components/Dashboard/Content/Projects/All/ProjectPagination/ProjectPagination.jsx";
+import SupervisorProjectPagination from "./page/UserPanel/supervisorProject/SupervisorProjectPagination.jsx";
+import NewWorkSampleCategory from "./Components/Dashboard/Content/WorkSamples/New/NewWorkSampleCategory.jsx";
+import WorkSampleGallery from "./page/MotionGraphics/WorkSampleGallery.jsx";
+
+
+
 
 
 const App = () => {
@@ -86,8 +92,10 @@ const App = () => {
           <Route path="order" element={<Order />} />
           <Route path="recruitment" element={<Recruitment />} />
           <Route path="LoginLearn" element={<LoginLearn />} />
-          <Route path="workSamples/graphic/MotionGraphics" element={<MotionGraphics />} />
-          <Route path="workSamples/graphic/UI_UX" element={<UI_UX />} />
+          <Route path="workSamples/:id/:name" element={<MotionGraphics />} > </Route>
+          <Route path="/:id/:name" element={<WorkSampleGallery />} />
+           
+          {/* <Route path="workSamples/graphic/UI_UX" element={<UI_UX />} />
           <Route path="workSamples/graphic/Brochure" element={<Brochure />} />
           <Route path="workSamples/graphic/Poster" element={<Poster />} />
           <Route path="workSamples/graphic/Catalog" element={<Catalog />} />
@@ -97,7 +105,7 @@ const App = () => {
           <Route path="workSamples/web/WebsiteDesignPortfolio" element={<WebsiteDesignPortfolio />} />
           <Route path="workSamples/Application" element={<Application />} />
           <Route path="workSamples/Seo" element={<Seo />} />
-          <Route path="workSamples/Voicing" element={<Voicing />} />
+          <Route path="workSamples/Voicing" element={<Voicing />} /> */}
           <Route path="services/اپلیکیشن-موبایل" element={<SApplication />} />
           <Route path="services/خدمات-تدوین-صدا-و-صدا-گذاری" element={<SSoundEditing />} />
           <Route path="services/فروش-سایت-اختصاصی-و-اقتصادی" element={<EcoSaleWeb />} />
@@ -112,9 +120,9 @@ const App = () => {
           <Route path="services/خدمات-گرافیک" element={<SGraphic />} />
           <Route path="ContactUs" element={<ContactUs />} />
           <Route path="articles" element={<ArticlesPagination/>}/>
-          <Route path="articles/article/:id" element={<Article/>}/>
+          <Route path="articles/article/:id/:title" element={<Article/>}/>
           <Route path="news/page/:id" element={<NewsPage/>}/>
-          <Route path="shop/product/:id" element={<Product/>}/>
+          <Route path="shop/product/:id/:title" element={<Product/>}/>
           <Route path="news" element={<News/>}/>
           <Route path="*" element={<Error/>}/>
           <Route path='dashboard' element={<Dashboard/>}/>
@@ -130,6 +138,7 @@ const App = () => {
             <Route path="favorites" element={<Favorites/>}/>
             <Route path="userProfile" element={<UserProfile/>}/>
             <Route path="projects" element={<ProjectPagination/>}/>
+            <Route path="supervisorProjects" element={<SupervisorProjectPagination/>}/>
             <Route path="orders" element={<Orders/>}/>
           </Route>
           <Route path="about_us" element={<About_us/>}/>
@@ -140,6 +149,7 @@ const App = () => {
           <Route path="ForgetPassword" element={<ForgetPassword/>}/>
           <Route path="privacy_and_policy" element={<Privacy/>}/>
           <Route path="our-business-plans" element={<PlansPage/>}/>
+          <Route path="newWorkSampleCategory" element={<NewWorkSampleCategory/>}/>
         </Routes>
       </div>
       <ApiLoading/>

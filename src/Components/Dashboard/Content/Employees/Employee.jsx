@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CgCalendarDates } from 'react-icons/cg';
+import { CgCalendarDates, CgEuro } from 'react-icons/cg';
 import { FaUsers } from 'react-icons/fa';
 import { HiUserCircle } from 'react-icons/hi';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
@@ -13,7 +13,12 @@ function Employee({ currentItems , setShowDetails }) {
   
   return (
       <div className='w-full p-10 flex items-center 2xl:w-[70%] flex-col gap-5'>
-      <span className='w-full text-white font-bold'>تعداد استخدامی ها ( {currentItems !== null ? currentItems.length : 'NaN'} )</span>
+     {currentItems.status == 'acceptad' ? 
+     <span className='w-full text-white font-bold'>تعداد( {currentItems !== null ? currentItems.length : 'NaN'} )</span>
+    :
+    <span className='w-full text-white font-bold'>تعداد( {currentItems !== null ? currentItems.length : 'NaN'} )</span>
+    }
+      
       <div className='hidden md:flex bg-[#ffffff69] w-full p-5 text-white text-2xl justify-between'>
         <FaUsers/>
         <TbAlphabetLatin/>
@@ -29,9 +34,7 @@ function Employee({ currentItems , setShowDetails }) {
               <h1 className='text-lg font-[shabnambold]'>{user?.first_name} {user?.last_name}</h1>
               <span>{user?.email}</span>
               <span className='text-sm font-[shabnamBold]'>{moment(user?.created_at).format("jYYYY/jMM/jDD")}</span>
-              {/* <div className='flex items-center gap-3'>
-                <MdDeleteSweep className='scale-[1.5] hover:text-red-600 text-red-700 transition-all' onClick={()=>userRemoval(user.id)}/>
-              </div> */}
+              
             </div>
           ))
         }

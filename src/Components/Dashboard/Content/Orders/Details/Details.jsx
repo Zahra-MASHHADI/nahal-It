@@ -2,10 +2,12 @@ import moment from 'moment-jalaali';
 import React, { useEffect, useState } from 'react';
 import { MdCancel } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetailOrders } from '../../../../../features/dashboard/action';
 
-function Details({ details , setShowDetails , users , orderDetail }) {
+function Details({ details , setShowDetails , users }) {
+
     const user = users.find(user => user.id === details.value.user_id);
+    const orderDetail = useSelector(state => state.dashboard.detailOrders)
+ 
     function separateByCommas(number) {
         let numberString = String(number);
         

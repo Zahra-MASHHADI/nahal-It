@@ -53,7 +53,7 @@ function NewBanner() {
     
     <div className='flex flex-col w-[93%] sm:w-full opacity-motion 2xl:w-[70%]'>
         <div className='w-full bg-[#C0D9DB] p-2'>
-            <h1 className='font-semibold text-lg text-stone-800'>مقاله جدید</h1>
+            <h1 className='font-semibold text-lg text-stone-800'> ایجاد بنر جدید</h1>
         </div>
         <form className='flex flex-col items-center bg-[#ffffff70] px-2 py-5 w-full gap-8 z-10 opacity-90' onKeyDown={(e)=>formKeyNotSubmit(e)}>
            {/* title */}

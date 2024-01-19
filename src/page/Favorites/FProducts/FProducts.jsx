@@ -56,7 +56,7 @@ console.log(products)
                             <p className={urlPath === '/userPage/favorites' ? 'w-[10rem] 2xl:w-[15rem] line-clamp-1 text-[0.8rem] font-[shabnam]' : 'w-[15rem] md:w-[15rem] line-clamp-3 md:line-clamp-1 text-justify text-[0.8rem] font-[shabnam]'}>{item.description}</p>
                             <span className='text-sm font-[shabnamBold] text-stone-600'>{moment(item.created_at).format('jYYYY/jMM/jDD')}</span>
                             <div className='flex items-center gap-3 w-full flex-col md:w-fit md:flex-row'>
-                                <Link to={`/shop/product/${item.id}`} className='bg-[#E7B10A] text-center shadow-base text-white rounded-md px-0 w-1/2 md:w-fit md:px-2 lg:px-3 text-xs transition-all hover:brightness-105 py-1'>نمایش</Link>
+                                <Link to={`/shop/product/${item.id}/${item.title}`} className='bg-[#E7B10A] text-center shadow-base text-white rounded-md px-0 w-1/2 md:w-fit md:px-2 lg:px-3 text-xs transition-all hover:brightness-105 py-1'>نمایش</Link>
                                 <button className='bg-red-500 text-white rounded-md px-0 w-1/2 md:w-fit md:px-2 lg:px-3 text-xs transition-all hover:bg-red-400 py-1' onClick={()=>deleteFromFavorites(item.id)}>حذف</button>
                             </div>
                         </div>

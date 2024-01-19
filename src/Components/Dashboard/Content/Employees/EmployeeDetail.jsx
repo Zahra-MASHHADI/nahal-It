@@ -20,9 +20,10 @@ function EmployeeDetails({ setShowDetails , showDetails }) {
     loginDate = moment(loginDate, 'YYYY/MM/DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm:ss');
     updateDate = moment(updateDate, 'YYYY/MM/DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm:ss');
 function choicerecruitment(status){
+    setShowDetails("");
     dispatch(choiceEmployee({user:userInfo.id , status}))
 }
-  
+  console.log(showDetails)
 
   return (
     <div className='p-3 sm:p-10 w-full flex justify-center'>
@@ -40,6 +41,10 @@ function choicerecruitment(status){
             <span className='pr-5'>{ showDetails.last_name }</span>
         </div>
         <div className='flex flex-col gap-2'>
+            <span className='font-semibold text-[#2e424a]'>تاریخ تولد:</span>
+            <span className='pr-5'>{ showDetails.birthday }</span>
+        </div>
+        <div className='flex flex-col gap-2'>
             <span className='font-semibold text-[#2e424a]'>نام کاربری:</span>
             <span className='pr-5'>{ showDetails.username }</span>
         </div>
@@ -52,12 +57,24 @@ function choicerecruitment(status){
             <span className='pr-5'>{ showDetails.email }</span>
         </div>
         <div className='flex flex-col gap-2'>
+            <span className='font-semibold text-[#2e424a]'>تحصیلات:</span>
+            <span className='pr-5'>{ showDetails.eduction_status }</span>
+        </div>
+        <div className='flex flex-col gap-2'>
+            <span className='font-semibold text-[#2e424a]'>فعالیتها:</span>
+            <span className='pr-5'>{ showDetails.activity }</span>
+        </div>
+        <div className='flex flex-col gap-2'>
             <span className='font-semibold text-[#2e424a]'>شماره کارت:</span>
             <span className='pr-5'>{ showDetails.card_number }</span>
         </div>
         <div className='flex flex-col gap-2'>
             <span className='font-semibold text-[#2e424a]'>کد ملی:</span>
             <span className='pr-5'>{ showDetails.code_meli }</span>
+        </div>
+        <div className='flex flex-col gap-2'>
+            <span className='font-semibold text-[#2e424a]' > آدرس :  </span>
+            <span className='pr-5'>{ showDetails.address }</span>
         </div>
         <div className='flex flex-col gap-2'>
             <span className='font-semibold text-[#2e424a]'>تاریخ ورود:</span>
@@ -68,9 +85,14 @@ function choicerecruitment(status){
             <span className='pr-5 font-[shabnamBold]'>{updateDate}</span>
         </div>
         <div class="d-flex align-items-center justify-content-center vh-100">
-    <button class="btn btn-danger btn-lg text-white">Click Me</button>
-    <div className="btn bg-success btn-lg text-white  " onClick={()=> choicerecruitment('accepted')}> تایید برای استخدام </div>
-    <div className="btn btn-danger btn-lg text-white" onClick={()=> choicerecruitment('rejected')}> عدم تایید برای استخدام </div>
+            {     showDetails.status !== 'accepted' 
+            && 
+            <div className=" text-white font-bold py-2 px-4 rounded inline-block max-w-full  bg-[#57C053] hover:bg-[#62d15e]  " onClick={()=> choicerecruitment('accepted')}> تایید برای استخدام </div>
+            }
+    
+        <div className="bg-rose-500 text-white font-bold py-2 px-4 rounded inline-block max-w-full hover:bg-rose-700 mx-3" onClick={()=> choicerecruitment('rejected')}> عدم تایید برای استخدام </div>
+   
+    
   </div>
      
     </div>

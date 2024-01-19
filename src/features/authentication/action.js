@@ -7,7 +7,7 @@ export const register = createAsyncThunk(
   async (dataObj) => {
     try {
       const response = await axios.post(
-        "http://api.nahalit.ir/api/v1/users/register",
+        "https://api.nahalit.ir/api/v1/users/register",
         dataObj
       );
       return { data: response.data };
@@ -138,9 +138,10 @@ export const forgetPassword = createAsyncThunk(
   async (dataObj) => {
     try {
       const response = await axios.post(
-        "http://api.nahalit.ir/api/v1/users/doChangePassword",
+        "https://api.nahalit.ir/api/v1/users/doChangePassword",
         dataObj
       );
+
       return { data: response.data };
     } catch (axiosError) {
       let err = axiosError;

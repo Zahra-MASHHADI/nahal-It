@@ -6,7 +6,7 @@ import { BsEyeFill, BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function Detail({ blog , users }) {
-
+const title = blog.title.replace(/ /g, '-')
     function findUser(id){
         const user = users?.find(user => user.id === id );
         let fullName = `${user?.first_name} ${user?.last_name}`;
@@ -23,11 +23,11 @@ function Detail({ blog , users }) {
                     <BiTimeFive/>
                     <span className="font-[shabnamBold]">{moment(blog.created_at).format('jYYYY/jMM/jDD')}</span>
                 </div>
-                <Link href='./'><span className="text-base font-[shabnambold] leading-8 m-0 2xl:text-[1.3rem]">{blog.title}</span></Link>
+                <Link  to={`/articles/article/${blog.id}/${title}`}><span className="text-base font-[shabnambold] leading-8 m-0 2xl:text-[1.3rem]">{blog.title}</span></Link>
                 </div>
                 <p className="line-clamp-4 2xl:text-[1rem] font-[shabnamMedium] text-[#686868] text-justify leading-7 text-sm px-3">{blog.body}</p>
                 <div className="w-full flex justify-center mt-2">
-                <Link to={`/articles/article/${blog.id}`}><button type="button" className="text-white px-3 py-1 flex rounded-md text-base font-[shabnamBold] transition-all duration-500 hover:bg-green-600 bg-green-500">بیشتر بخوانید...</button></Link>
+                <Link to={`/articles/article/${blog.id}/${title}`}><button type="button" className="text-white px-3 py-1 flex rounded-md text-base font-[shabnamBold] transition-all duration-500 hover:bg-green-600 bg-green-500">بیشتر بخوانید...</button></Link>
                 </div>
             </div>
             </div>

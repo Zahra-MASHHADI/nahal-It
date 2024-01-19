@@ -55,10 +55,23 @@ import {
   updateRole,
   updateUser,
   getSupervisors,
+  getSupervisorProjects,
   choiceEmployee,
   getBanner,
   editBanner,
   deleteBanner,
+  getWorkSampleCategories,
+  addWorkSampleCategories,
+  deleteWorkSampleCategories,
+  addWorkSample,
+  getWorkSample,
+  editWorkSample,
+  deleteWorkSample,
+  getworkSampleGalleries,
+  addworkSampleGalleries,
+  deleteworkSampleGalleries,
+  getworkSampleGalleriesDetail,
+  getWorkSampleDetail,
 } from "./action";
 
 const initialState = {
@@ -69,13 +82,13 @@ const initialState = {
   gallerySwitch: "all",
   productsSwitch: "all",
   rolesSwitch: "all",
-  employeeSwitch: "aproval",
   couponSwitch: "all",
   projectSwitch: "all",
   discountSwitch: "all",
   linksSwitch: "all",
   newsSwitch: "all",
   tagsSwitch: "all",
+  worksampleSwitch:'all',
   productId: null,
   supervisors: [],
   supervisorProjects: [],
@@ -83,7 +96,13 @@ const initialState = {
   projects: [],
   discounts: [],
   coupons: [],
+  workSampleCategories:[],
+  workSampleGalleriesDetail:[],
+  workSampleDetail:[],
+  workSample:[],
+  workSampleGalleries:[],
   supervisorsLoading: false,
+  workSamplesLoading: false,
   supervisorProjectsLoading: false,
   productsLoading: false,
   discountsLoading: false,
@@ -120,7 +139,7 @@ const initialState = {
   detailOrders: [],
   gallery: [],
   employee: [],
-  employeesSwitch: "approval",
+  employeesSwitch: "unapproval",
   galleryId: "",
   categoriesLoading: false,
   categoriesError: "",
@@ -130,6 +149,7 @@ const initialState = {
   getGallerySuccess: false,
   editSuccess: false,
   articleLoading: false,
+  employeeLoading: false,
   workSamplesLoading: false,
   discountId: "",
   roles: [],
@@ -146,6 +166,7 @@ const initialState = {
     title_2: "",
     id_2: "",
   },
+  token: localStorage.getItem('access_token') || '', 
 };
 
 const dashboardSlice = createSlice({
@@ -195,8 +216,8 @@ const dashboardSlice = createSlice({
             state.employeesSwitch = value;
           }
           break;
-        case "workSample":
-          state.workSampleSwitch = value;
+        case "worksample":
+          state.worksampleSwitch = value;
           break;
         case "projects":
           state.projectSwitch = value;
@@ -324,7 +345,7 @@ const dashboardSlice = createSlice({
         state.productsLoading = true;
       })
       .addCase(getProducts.rejected, (state, action) => {
-        state.productsLoading = false;
+        state.productsLoading = faladdprodse;
         console.error("* error in getting products *");
       })
 
@@ -451,7 +472,7 @@ const dashboardSlice = createSlice({
         state.projectsLoading = false;
         toast.success("سفارش با موفقیت ذخیره شد");
       })
-      .addCase(addSefaresh.pending, (state, action) => {
+  .addCase(addSefaresh.pending, (state, action) => {
         state.projectsLoading = true;
       })
       .addCase(addSefaresh.rejected, (state, action) => {
@@ -677,36 +698,49 @@ const dashboardSlice = createSlice({
         console.error(action);
       })
 
+      .addCase(getSupervisorProjects.pending, (state) => {
+        state.supervisorProjectsLoading = true;
+      })
+      .addCase(getSupervisorProjects.fulfilled, (state, action) => {
+        state.supervisorProjectsLoading = false;
+        console.log(action)
+        state.supervisorProjects = action.payload;
+      })
+      .addCase(getSupervisorProjects.rejected, (state, action) => {
+        state.supervisorProjects = false;
+        console.error(action);
+      })
       //getEmployees
       .addCase(getEmployee.fulfilled, (state, action) => {
-        state.usersLoading = false;
+        state.employeeLoading = false;
         console.log(action)
         state.employee = action.payload
       
       })
       .addCase(getEmployee.pending, (state, action) => {
-        state.usersLoading = true;
+        state.employeeLoading = true;
       })
       .addCase(getEmployee.rejected, (state, action) => {
-        state.usersLoading = false;
+        state.employeeLoading = false;
         console.error(action);
       })
       .addCase(choiceEmployee.fulfilled, (state, action) => {
-        state.usersLoading = false;
+        state.employeeLoading = false;
         if(action.payload.error) {
           toast.warn(action.payload.error.data?.massage);
           console.log(action)
       } else
       {
-          toast.success(action.payload.data.massage);
+        console.log(action)
+          toast.success(action.payload.massage);
       }
       
       })
       .addCase(choiceEmployee.pending, (state, action) => {
-        state.usersLoading = true;
+        state.employeeLoading = true;
       })
       .addCase(choiceEmployee.rejected, (state, action) => {
-        state.usersLoading = false;
+        state.employeeLoading = false;
         console.error(action);
       })
       // update user
@@ -795,7 +829,9 @@ const dashboardSlice = createSlice({
       // get banner 
       .addCase(getBanner.fulfilled, (state, action) => {
         state.bannerLoading = false;
-        state.banner = action.payload.data;
+     
+        state.banner = action.payload.banners;
+      
       })
       .addCase(getBanner.pending, (state, action) => {
         state.bannerLoading = true;
@@ -854,6 +890,7 @@ const dashboardSlice = createSlice({
         state.ordersLoading = false;
       })
       .addCase(getDetailOrders.fulfilled, (state, action) => {
+  
         state.ordersLoading = false;
         console.log(action.payload);
         state.detailOrders = action.payload;
@@ -1050,7 +1087,166 @@ const dashboardSlice = createSlice({
       .addCase(deleteLink.rejected, (state, action) => {
         state.linkDeleteLoading = false;
         toast.error("خطا در  حذف مسیر");
-      });
+      })
+
+      // get WorkSampleCategories
+      .addCase(getWorkSampleCategories.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        state.workSampleCategories = action.payload.categories;
+        console.log(action);
+      })
+      .addCase(getWorkSampleCategories.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(getWorkSampleCategories.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  بارگیری ");
+      })
+
+      // add WorkSampleCategories
+      .addCase(addWorkSampleCategories.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.success("با موفقیت ذخیره شد");
+      })
+      .addCase(addWorkSampleCategories.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(addWorkSampleCategories.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  افزودن ");
+      })
+
+      // delete WorkSampleCategories
+      .addCase(deleteWorkSampleCategories.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.success(action.payload.massage);
+      })
+      .addCase(deleteWorkSampleCategories.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(deleteWorkSampleCategories.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  حذف ");
+      })
+      //get WorkSample
+      .addCase(getWorkSample.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        state.workSample = action.payload.data;
+        console.log(action);
+      })
+      .addCase(getWorkSample.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(getWorkSample.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  بارگیری ");
+      })
+      .addCase(getWorkSampleDetail.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        state.workSampleDetail = action.payload.data;
+        console.log(action);
+      })
+      .addCase(getWorkSampleDetail.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(getWorkSampleDetail.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  بارگیری ");
+      })
+
+      // add WorkSample
+      .addCase(addWorkSample.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.success("با موفقیت ذخیره شد");
+      })
+      .addCase(addWorkSample.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(addWorkSample.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  افزودن ");
+      })
+
+      // delete WorkSample
+      .addCase(deleteWorkSample.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        console.log(action.payload)
+        toast.success(action.payload);
+      })
+      .addCase(deleteWorkSample.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(deleteWorkSample.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  حذف ");
+      })
+      //edit worksample
+      .addCase(editWorkSample.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        console.log(action)
+        toast.success(action.payload.message);
+      })
+      .addCase(editWorkSample.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(editWorkSample.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  حذف ");
+        })
+        
+      // get getworkSampleGalleries
+      .addCase(getworkSampleGalleries.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        state.workSampleGalleries = action.payload.work_samples_gallery;
+        toast.success(action.payload.massage);
+      })
+      .addCase(getworkSampleGalleries.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(getworkSampleGalleries.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  بارگیری ");
+      })
+
+      // add workSampleGalleries
+      .addCase(addworkSampleGalleries.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.success("با موفقیت ذخیره شد");
+      })
+      .addCase(addworkSampleGalleries.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(addworkSampleGalleries.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  افزودن ");
+      })
+      
+      // delete WorkSamplegallery
+      .addCase(deleteworkSampleGalleries.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.success(action.payload.massage);
+      })
+      .addCase(deleteworkSampleGalleries.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(deleteworkSampleGalleries.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  حذف ");
+      })
+      .addCase(getworkSampleGalleriesDetail.fulfilled, (state, action) => {
+        state.workSamplesLoading = false;
+        console.log(action)
+        state.workSampleGalleriesDetail = action.payload;
+
+        toast.success(action.payload.massage);
+      })
+      .addCase(getworkSampleGalleriesDetail.pending, (state, action) => {
+        state.workSamplesLoading = true;
+      })
+      .addCase(getworkSampleGalleriesDetail.rejected, (state, action) => {
+        state.workSamplesLoading = false;
+        toast.error("خطا در  گرفتن اطلاعات ");
+      })
   },
 });
 

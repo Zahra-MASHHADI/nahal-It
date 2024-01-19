@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { products } from "../../API/data";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdUpdate } from "react-icons/md";
 import moment from "moment-jalaali";
 import { PiStarFill } from 'react-icons/pi';
@@ -57,7 +57,7 @@ const CustomSlider = ({ title , translate , items , discounts , tags , isLoading
           <div className="flex items-center justify-start gap-5 py-8">
           {
             items.map((product,index) => (
-              <div key={`product-slide${index}`} className="sliderItem" onClick={()=>navigate(`/shop/product/${product.id}`)}>
+              <Link to={`/shop/product/${product.id}/${product.title}`} target="_blank" key={`product-slide${index}`} className="sliderItem" onClick={()=>navigate(`/shop/product/${product.id}`)}>
                 <div className="sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] 2xl:w-[16.5vw] cursor-pointer hover:brightness-125 w-[85vw] flex h-[370px] flex-col bg-white justify-around  overflow-hidden rounded-2xl   hover:-translate-y-2 transition-all duration-500 hover:shadow-[4px_4px_17px_-10px_rgba(0,0,0,1)] shadow-[0px_2px_8px_rgba(0,0,0,0.15)]">
                   <div className="flex items-start justify-center h-full">
                     <img
@@ -97,7 +97,7 @@ const CustomSlider = ({ title , translate , items , discounts , tags , isLoading
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           }
           </div>

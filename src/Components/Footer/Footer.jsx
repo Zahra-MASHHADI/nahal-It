@@ -28,7 +28,6 @@ const Footer = () => {
           <Link className="mt-5 text-[1rem] font-[shabnam]" to="/order">
             ثبت سفارش
           </Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/be_seller">فروشنده باشید</Link>
           <Link className="text-[1rem] font-[shabnam]" to="/recruitment">استخدام</Link>
           <Link className="text-[1rem] font-[shabnam]" to="/news">اخبار سایت نهال آی تی</Link>
         </div>
@@ -51,15 +50,15 @@ const Footer = () => {
             خدمات تیم نهال آی تی
           </span>
           <div className="w-full h-[2px] bg-white"></div>
-          <Link className="mt-5 text-[1rem] font-[shabnam]" to="/services/فروش-سایت-اختصاصی-و-اقتصادی">
+          <Link className="mt-5 text-[1rem] font-[shabnam]" to="/services/فروش-سایت-اختصاصی-و-اقتصادی" target="_blank">
             فروش سایت اختصاصی و اقتصادی
           </Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/services/فروش-قالب-سایت">فروش قالب سایت</Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/services/طراحی-سایت-اختصاصی">طراحی سایت اختصاصی</Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/services/خدمات-سئو-وب-سایت">خدمات وبسایت و سئو وب سایت</Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/services/خدمات-کسب-و-کار">خدمات کسب و کار</Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/services/خدمات-شبکه-های-اجتماعی" >خدمات شبکه های اجتماعی</Link>
-          <Link className="text-[1rem] font-[shabnam]" to="/services/موشن-گرافیک">خدمات موشن گرافیک</Link>
+          <Link className="text-[1rem] font-[shabnam]" to="/services/فروش-قالب-سایت" target="_blank">فروش قالب سایت  </Link>
+          <Link className="text-[1rem] font-[shabnam]" to="/services/طراحی-سایت-اختصاصی" target="_blank">طراحی سایت اختصاصی</Link>
+          <Link className="text-[1rem] font-[shabnam]" to="/services/خدمات-سئو-وب-سایت" target="_blank">خدمات وبسایت و سئو وب سایت</Link>
+          <Link className="text-[1rem] font-[shabnam]" to="/services/خدمات-کسب-و-کار" target="_blank">خدمات کسب و کار</Link>
+          <Link className="text-[1rem] font-[shabnam]" to="/services/خدمات-شبکه-های-اجتماعی" target="_blank" >خدمات شبکه های اجتماعی</Link>
+          <Link className="text-[1rem] font-[shabnam]" to="/services/موشن-گرافیک" target="_blank">خدمات موشن گرافیک</Link>
         </div>
         <div className="flex flex-col justify-center gap-y-4">
           <FaSeedling className="text-4xl text-white" />
@@ -127,24 +126,7 @@ const Footer = () => {
             <Link to={"/privacy_and_policy"} className="hover:bg-[#4CA449] px-3 py-2 rounded-md transition-all duration-300 text-[#c5c3c3]">سیاست و حریم خصوصی</Link>
           </li>
         </ul>
-        <div className="flex items-center justify-center mt-3 sm:mt-0 gap-x-1 mr-10">
-          <HiCode
-            onMouseEnter={SiteCreateOnEnterMouse}
-            onMouseLeave={SiteCreateOnOutMouse}
-            className={
-              Footer
-                ? "bg-[#57C053] text-white w-8 h-8 p-1 rounded-lg translate-x-12 transition-all duration-500"
-                : "bg-[#57C053] text-white w-8 h-8 p-1 rounded-lg transition-all duration-500"
-            }
-          />
-          <p
-            onMouseEnter={SiteCreateOnEnterMouse}
-            onMouseLeave={SiteCreateOnOutMouse}
-            className={Footer ? "translate-x-12 transition-all duration-500" : "opacity-0  transition-all duration-500"}
-          >
-          <Link to={"https://sarzaminhooshmand.com/"}>توسعه : سرزمین هوشمند </Link>
-          </p>
-        </div>
+      a
       </div>
     </div>
   );
