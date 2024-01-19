@@ -5,6 +5,7 @@ import EmployeeDetails from "./EmployeeDetail";
 import Employee from "./Employee";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import UnEmployee from "./unEmployee";
 
 export default function EmployeesPagination(){
     const employees = useSelector(state => state.dashboard.employee);
@@ -19,11 +20,17 @@ export default function EmployeesPagination(){
     const pageCount = Math.ceil(employees.length / itemsPerPage);
   const [innerComponent,setInnerComponent] = useState(<></>);
     const Criterion = useSelector(state=> state.dashboard.employeesSwitch);
+<<<<<<< HEAD
  
+=======
+    const unapproval = currentItems.filter(item =>item.status === 'waiting');
+    const approval = currentItems.filter(item =>item.status === 'accepted');
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     const [items, setItems] = useState([]);
     useEffect(()=>{
         switch(Criterion)
         {
+<<<<<<< HEAD
             case 'unapproval' :  setItems(employees.filter(item => item.status === 'waiting')) ;
             break;
             case 'approval' :    setItems(employees.filter(item => item.status === 'accepted'));
@@ -44,6 +51,15 @@ export default function EmployeesPagination(){
           default : setInnerComponent(<></>)
       }
   },[])
+=======
+            case 'unapproval' : setItems(unapproval) ;
+            break;
+            case 'approval' : setItems(approval) ;
+            break;
+            default : setInnerComponent(<></>)
+        }
+    },[Criterion])
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 console.log(items);
     const dispatch = useDispatch();
     useEffect(()=>{

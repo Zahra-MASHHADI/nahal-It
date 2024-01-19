@@ -4,7 +4,6 @@ import { BiLogOutCircle } from 'react-icons/bi';
 
 const UserSideBar = ({ dropMenu , logOutHandle}) => {
   const userInfo = JSON.parse(Cookies.get("user"));
-  console.log(userInfo)
   return (
     <aside className={dropMenu ? "md:basis-1/3 lg:basis-1/4 shadow-md rounded-lg min-h-[100%] h-[100%] w-[90%] md:w-[10%] transition-all duration-300" : "md:basis-1/3 lg:basis-1/4 shadow-md rounded-lg min-h-[0px] h-[0px] md:min-h-[90vh] md:h-[100%] transition-all duration-300 overflow-hidden w-[90%] md:w-[10%]"}>
       <ul className="space-y-1 font-medium p-2 h-full">
@@ -14,7 +13,11 @@ const UserSideBar = ({ dropMenu , logOutHandle}) => {
         <SideBarLink link={"favorites"} text={"علاقه مندی ها"}/>
         <SideBarLink link={"orders"} text={"سفارش ها"}/>
         <SideBarLink link={"downloads"} text={"دانلود ها"}/>
+<<<<<<< HEAD
         {userInfo.role_id === 5 && <SideBarLink link={'supervisorProjects'} text={"پروژه ها"} />}
+=======
+        {userInfo.role_id === 5 && <SideBarLink link={'supervisorProjects'} text={"پروژه ها"}/>}
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
         <SideBarLink link={"/"} text={"صفحه اصلی"}/>
     
         <li>

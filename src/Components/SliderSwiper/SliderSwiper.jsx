@@ -6,12 +6,20 @@ import { getBanner } from "../../features/dashboard/action";
 
 const SliderSwiper = () => {
   const photoSlider = useSelector(state => state.dashboard.banner);
+<<<<<<< HEAD
   const dispatch = useDispatch()
 useEffect( ()=>{
   dispatch(getBanner())
   console.log(photoSlider);
 }
   ,[])
+=======
+  const dispatch = useDispatch();
+useEffect(()=>{
+  dispatch(getBanner())
+  console.log(photoSlider)
+},[])
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
   return (
     <div className="relative -z-50 max-w-full overflow-hidden">
       <Swiper

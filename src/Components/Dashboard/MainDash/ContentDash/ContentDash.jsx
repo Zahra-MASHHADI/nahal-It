@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { React, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Articles from "../../Content/Articles/Articles";
@@ -17,6 +18,25 @@ import EmployeesPagination from "../../Content/Employees/EmployeesPagination";
 import SupervisorsPagination from "../../Content/supervisors/SupervisorsPagination";
 import BannerPagination from "../../Content/Banner/allBanner/bannerPagination/BannerPagination";
 import WorkSamples from "../../Content/WorkSamples/WorkSamples";
+=======
+import { React, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Articles from '../../Content/Articles/Articles';
+import Categories from '../../Content/Categories/Categories';
+import Coupons from '../../Content/Coupons/Coupons';
+import Discount from '../../Content/Discount/Discount';
+import OrdersPagination from '../../Content/Orders/OrdersPagination/OrdersPagination';
+import Products from '../../Content/Products/Products';
+import Projects from '../../Content/Projects/Projects';
+import Roles from '../../Content/Roles/Roles';
+import SellersPagination from '../../Content/Sellers/SellersPagination/SellersPagination';
+import Tags from '../../Content/Tags/Tags';
+import UsersPagination from '../../Content/Users/UsersPagination/UsersPagination';
+import News from '../../Content/News/News';
+import Links from '../../Content/Links/Links';
+import EmployeesPagination from '../../Content/Employees/EmployeesPagination';
+import Banner from '../../Content/Banner/Banner';
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
 function ContentDash() {
   const [currentContent, setCurrentContent] = useState(null);
@@ -25,6 +45,7 @@ function ContentDash() {
   const scrollUp = useSelector((state) => state.dashboard.scrollUp);
 
   useEffect(() => {
+<<<<<<< HEAD
     switch (content) {
       case "categories":
         setCurrentContent(<Categories />);
@@ -76,6 +97,41 @@ function ContentDash() {
           break;
       default:
         setCurrentContent("این بخش وجود ندارد");
+=======
+    switch(content)
+    {
+      case 'categories' : setCurrentContent(<Categories/>)
+      break
+      case 'articles' : setCurrentContent(<Articles/>)
+      break
+      case 'products' : setCurrentContent(<Products/>)
+      break
+      case 'orders' : setCurrentContent(<OrdersPagination/>)
+      break
+      case 'users' : setCurrentContent(<UsersPagination/>)
+      break
+      case 'employee' : setCurrentContent(<EmployeesPagination/>)
+      break
+      case 'projects' : setCurrentContent(<Projects/>)
+      break
+      case 'roles' : setCurrentContent(<Roles/>)
+      break;
+      case 'discount' : setCurrentContent(<Discount/>)
+      break;
+      case 'sellers' : setCurrentContent(<SellersPagination/>)
+      break;
+      case 'coupon' : setCurrentContent(<Coupons/>)
+      break;
+      case 'tags' : setCurrentContent(<Tags/>)
+      break;
+      case 'news' : setCurrentContent(<News/>)
+      break;
+      case 'links' : setCurrentContent(<Links/>)
+      break;
+      case 'banner' : setCurrentContent(<Banner/>)
+      break;
+      default : setCurrentContent('این بخش وجود ندارد')
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     }
   }, [content]);
 

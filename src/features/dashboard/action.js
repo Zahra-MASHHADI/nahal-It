@@ -152,8 +152,17 @@ export const editProject = createAsyncThunk(
     const response = await instance.put(`/projects/${id}`, dataObj);
     const { data } = response;
     return data;
+<<<<<<< HEAD
   }
 );
+=======
+});
+export const choiceRecruitment = createAsyncThunk('dashboard/choiceRecruitment', async ({user,status}) => {
+    const response = await instance.post(`/role/choiceRecruitment/${user}`,{status});
+    const { data } = response;
+    return data;
+})
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
 // discount
 export const addDiscount = createAsyncThunk(
@@ -370,6 +379,7 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+<<<<<<< HEAD
 export const getEmployee = createAsyncThunk(
   "dashboard/getEmployee",
   async () => {
@@ -384,6 +394,16 @@ export const choiceEmployee = createAsyncThunk(
   async ({user , status}) => {
    
     const response = await instance.post(`/choiceRecruitment/${user}` , {status});
+=======
+export const getEmployee = createAsyncThunk('dashboard/getEmployee', async () => {
+    const response = await instance.get('/recruitments');
+    const { data } = response;
+    console.log(data)
+    return data;
+});
+export const getSupervisorProjects = createAsyncThunk('dashboard/getSupervisorProjects', async (id) => {
+    const response = await instance.get(`getSupervisorProjects/${id}`);
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     const { data } = response;
     console.log(data)
     return data;
@@ -536,10 +556,20 @@ export const deleteLink = createAsyncThunk(
   }
 );
 // photo slider
+<<<<<<< HEAD
 export const getPhotoSlider = createAsyncThunk(
   "dashboard/getPhotoSlider",
   async () => {
     const response = await instance.get(`/images`);
+=======
+export const getBanner = createAsyncThunk("dashboard/getBanners" , async () => {
+    const response = await instance.get(`/banners`);
+    const { data } = response;
+    return data;
+})
+export const addBanner = createAsyncThunk("dashboard/addBanners" , async (dataObj) => {
+    const response = await instance.post(`/banners` , dataObj);
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     const { data } = response;
     return data;
   }

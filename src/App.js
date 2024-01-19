@@ -66,11 +66,15 @@ import NewsPage from "./page/NewsPage/NewsPage";
 import OneTimeCode from "./page/Authentication/Login/oneTimeCode/oneTimeCode.jsx";
 import UserProjects from "./page/UserPanel/UserProjects.jsx";
 import ProjectPagination from "./Components/Dashboard/Content/Projects/All/ProjectPagination/ProjectPagination.jsx";
+<<<<<<< HEAD
 import SupervisorProjectPagination from "./page/UserPanel/supervisorProject/SupervisorProjectPagination.jsx";
 import NewWorkSampleCategory from "./Components/Dashboard/Content/WorkSamples/New/NewWorkSampleCategory.jsx";
 import WorkSampleGallery from "./page/MotionGraphics/WorkSampleGallery.jsx";
 
 
+=======
+import SupervisorProjectPagination from "./Components/Dashboard/Content/Projects/supervisorProjects/supervisorProjectsPagination/SupervisorProjectsPagination.jsx";
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
 
 

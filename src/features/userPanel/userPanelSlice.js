@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+<<<<<<< HEAD
 import { updateUserInfo , changeUserPassword, changeUserRole } from "./action";
+=======
+import { updateUserInfo , changeUserPassword , updateUserRole} from "./action";
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
@@ -14,6 +18,7 @@ const userPanelSlice = createSlice({
     extraReducers: builder => {
         builder
         .addCase(updateUserInfo.fulfilled , (state,action) => {
+            console.log(action.payload)
             let {res, newData} = action.payload;
             state.isLoading = false;
             console.log(action)
@@ -68,6 +73,29 @@ const userPanelSlice = createSlice({
         .addCase(changeUserPassword.rejected, (state,action) => {
             state.isLoading = false; 
             console.error(action)
+        })
+        .addCase(updateUserRole.fulfilled , (state,action) => {
+            let {res, newData} = action.payload;
+            state.isLoading = false;
+            console.log(action)
+            console.log(newData)
+            if(action.payload.error)
+            {
+                toast.warning(action.payload.error.massage)
+            }
+            else if(action.payload?.res){
+                state.criterion = !state.criterion;
+                toast.success(res.massage);
+                Cookies.set("user",JSON.stringify(newData.user))
+            }
+        })
+        .addCase(updateUserRole.pending , (state,action) => {
+            state.isLoading = true;
+        })
+        .addCase(updateUserRole.rejected , (state,action) => {
+            state.isLoading = false;
+            toast.error("خطا در ویرایش اطلاعات")
+            console.error(action.error)
         })
     }
 });

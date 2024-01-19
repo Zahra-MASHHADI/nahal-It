@@ -27,6 +27,7 @@ import { RiUserStarFill } from "react-icons/ri";
 
 function SideDash({ dropMenu, setDropMenu }) {
   // const [cRotate,setCRotate] = useState(false);
+<<<<<<< HEAD
   const [aRotate, setARotate] = useState(false);
   const [eRotate, setERotate] = useState(false);
   const [pRotate, setPRotate] = useState(false);
@@ -60,10 +61,43 @@ function SideDash({ dropMenu, setDropMenu }) {
   const loginStatus = useSelector((state) => state.authentication.loginStatus);
 
   const users = useSelector((state) => state.dashboard.users);
+=======
+  const [aRotate,setARotate] = useState(false);
+  const [bRotate,setBRotate] = useState(false);
+  const [pRotate,setPRotate] = useState(false);
+  const [prRotate,setPRRotate] = useState(false);
+  const [cRotate,setCRotate] = useState(false);
+  const [gRotate,setGRotate] = useState(false);
+  const [rRotate,setRRotate] = useState(false);
+  const [wRotate,setWRotate] = useState(false);
+  const [dRotate,setDRotate] = useState(false);
+  const [coRotate,setCoRotate] = useState(false);
+  const [tRotate,setTRotate] = useState(false);
+  const [nRotate,setNRotate] = useState(false);
+  const [lRotate,setLRotate] = useState(false);
+  const [eRotate,setERotate] = useState(false);
+  const content = useSelector(state => state.dashboard.content);
+  const aCriterion = useSelector(state => state.dashboard.articlesSwitch);
+  const pCriterion = useSelector(state => state.dashboard.productsSwitch);
+  const gCriterion = useSelector(state => state.dashboard.gallerySwitch);
+  const rCriterion = useSelector(state => state.dashboard.rolesSwitch);
+  const eCriterion = useSelector(state => state.dashboard.employeesSwitch);
+  const prCriterion = useSelector(state => state.dashboard.projectSwitch);
+  const dCriterion = useSelector(state => state.dashboard.discountSwitch);
+  const tCriterion = useSelector(state => state.dashboard.tagsSwitch);
+  const coCriterion = useSelector(state => state.dashboard.couponSwitch);
+  const nCriterion = useSelector(state => state.dashboard.newsSwitch);
+  const lCriterion = useSelector(state => state.dashboard.linksSwitch);
+  const bCriterion = useSelector(state => state.dashboard.bannerSwitch);
+  const loginStatus = useSelector(state => state.authentication.loginStatus);
+  
+  const users = useSelector(state => state.dashboard.users);
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
   const dispatch = useDispatch();
 
   const listSwitch = (value) => {
+<<<<<<< HEAD
     dispatch(setContent(value));
     if (
       aRotate |
@@ -82,6 +116,11 @@ function SideDash({ dropMenu, setDropMenu }) {
         lRotate &&
       value !== "articles"
     ) {
+=======
+    dispatch(setContent(value))
+    if(aRotate | eRotate| cRotate | gRotate | rRotate | prRotate | dRotate | wRotate | tRotate | coRotate | nRotate | lRotate | bRotate && value !== 'articles')
+    {
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
       setCRotate(false);
       setGRotate(false);
       setRRotate(false);
@@ -95,6 +134,7 @@ function SideDash({ dropMenu, setDropMenu }) {
       setLRotate(false);
       setERotate(false);
       setBRotate(false);
+<<<<<<< HEAD
       setWsRotate(false);
     } else if (
       pRotate |
@@ -113,6 +153,11 @@ function SideDash({ dropMenu, setDropMenu }) {
         lRotate &&
       value !== "products"
     ) {
+=======
+    }
+    else if( pRotate | eRotate | cRotate | gRotate | rRotate | prRotate | dRotate | wRotate | tRotate | coRotate | nRotate | lRotate | bRotate && value !== 'products')
+    {
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
       setCRotate(false);
       setGRotate(false);
       setRRotate(false);
@@ -124,9 +169,13 @@ function SideDash({ dropMenu, setDropMenu }) {
       setTRotate(false);
       setNRotate(false);
       setLRotate(false);
+<<<<<<< HEAD
       setERotate(false);
       setBRotate(false);
       setWsRotate(false);
+=======
+      setBRotate(false);
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     }
   };
 
@@ -398,6 +447,7 @@ function SideDash({ dropMenu, setDropMenu }) {
               ایجاد
             </button>
           </div>
+<<<<<<< HEAD
         </div>
         <div className="w-full flex flex-col items-center">
           <div
@@ -453,6 +503,37 @@ function SideDash({ dropMenu, setDropMenu }) {
             >
               ایجاد
             </button>
+=======
+          <div className='w-full flex flex-col items-center'>
+          <div onClick={()=>{
+            listSwitch('employee') 
+            setERotate(!eRotate)
+            dispatch(setSwitch({key:'employee',value:'approval'}))
+            }}  style={{backgroundColor:content==='users'?'#232c38':''}}  className='flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300'>
+              <FaIdCard className='bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]'/>
+              <li className='text-white font-bold text-lg  text-center'>استخدامی ها</li>
+              <MdOutlineArrowLeft className='text-white w-[1.5rem] h-[1.5rem] transition-all duration-300' style={{rotate:eRotate?'-90deg':'0deg'}}/>
+          </div>
+          <div className='flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400' style={{height:eRotate?'fit-content':'0px',padding:eRotate?'10px':'0px',overflow:eRotate?'':'hidden',visibility:eRotate?'visible':'hidden',marginTop:eRotate?'1rem':'0px'}} >
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'employee',value:'approval'}))} style={{backgroundColor:eCriterion === 'approval' ? '#ffffff4d' : ''}}>استخدام شده</button>
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'employee',value:'unapproval'}))} style={{backgroundColor:eCriterion === 'unapproval' ? '#ffffff4d' : ''}}>در انتظار استخدام</button>
+                </div>
+                </div>
+          <div className='w-full flex flex-col items-center'>
+              <div onClick={()=>{
+                listSwitch('discount')
+                setDRotate(!dRotate)
+                dispatch(setSwitch({key:'discount',value:'all'}))
+              }}  style={{backgroundColor:content==='discount'?'#232c38':''}}  className='flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300'>
+                <TbDiscountCheckFilled className='bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]'/>
+                <li className='text-white font-bold text-lg  text-center'>تخفیف</li>
+                <MdOutlineArrowLeft className='text-white w-[1.5rem] h-[1.5rem] transition-all duration-300' style={{rotate:dRotate?'-90deg':'0deg'}}/>
+                </div>
+                <div className='flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400' style={{height:dRotate?'fit-content':'0px',padding:dRotate?'10px':'0px',overflow:dRotate?'':'hidden',visibility:dRotate?'visible':'hidden',marginTop:dRotate?'1rem':'0px'}} >
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'discount',value:'all'}))} style={{backgroundColor:dCriterion === 'all' ? '#ffffff4d' : ''}}>همه</button>
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'discount',value:'new'}))} style={{backgroundColor:dCriterion === 'new' ? '#ffffff4d' : ''}}>ایجاد</button>
+                </div>
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
           </div>
         </div>
         <div
@@ -520,6 +601,7 @@ function SideDash({ dropMenu, setDropMenu }) {
               استخدام شده
             </button>
           </div>
+<<<<<<< HEAD
         </div>
 
         <div className="w-full flex flex-col items-center">
@@ -538,6 +620,37 @@ function SideDash({ dropMenu, setDropMenu }) {
               className="text-white w-[1.5rem] h-[1.5rem] transition-all duration-300"
               style={{ rotate: dRotate ? "-90deg" : "0deg" }}
             />
+=======
+          <div className='w-full flex flex-col items-center'>
+              <div onClick={()=>{
+                listSwitch('banner')
+                setBRotate(!bRotate)
+                dispatch(setSwitch({key:'banner',value:'all'}))
+              }}  style={{backgroundColor:content==='banner'?'#232c38':''}}  className='flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300'>
+                <FaTags className='bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]'/>
+                <li className='text-white font-bold text-lg  text-center'> اضافه کردن بنر</li>
+                <MdOutlineArrowLeft className='text-white w-[1.5rem] h-[1.5rem] transition-all duration-300' style={{rotate:bRotate?'-90deg':'0deg'}}/>
+                </div>
+                <div className='flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400' style={{height:bRotate?'fit-content':'0px',padding:bRotate?'10px':'0px',overflow:bRotate?'':'hidden',visibility:bRotate?'visible':'hidden',marginTop:bRotate?'1rem':'0px'}} >
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'banner',value:'all'}))} style={{backgroundColor:bCriterion === 'all' ? '#ffffff4d' : ''}}>همه</button>
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'banner',value:'new'}))} style={{backgroundColor:bCriterion === 'new' ? '#ffffff4d' : ''}}>ایجاد</button>
+                </div>
+          </div>
+          <div className='w-full flex flex-col items-center'>
+              <div onClick={()=>{
+                listSwitch('links')
+                setLRotate(!lRotate)
+                dispatch(setSwitch({key:'links',value:'all'}))
+              }}  style={{backgroundColor:content==='links'?'#232c38':''}}  className='flex justify-between items-center rounded-sm w-[80%] py-2 px-2 cursor-default hover:bg-[#2a3441] hover:brightness-125 transition-all duration-300'>
+                <FaLink className='bg-[#356E65] p-1 rounded-md text-white w-[2rem] h-[2rem]'/>
+                <li className='text-white font-bold text-lg  text-center'>راه های ارتباطی</li>
+                <MdOutlineArrowLeft className='text-white w-[1.5rem] h-[1.5rem] transition-all duration-300' style={{rotate:lRotate?'-90deg':'0deg'}}/>
+                </div>
+                <div className='flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400' style={{height:lRotate?'fit-content':'0px',padding:lRotate?'10px':'0px',overflow:lRotate?'':'hidden',visibility:lRotate?'visible':'hidden',marginTop:lRotate?'1rem':'0px'}} >
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'links',value:'all'}))} style={{backgroundColor:lCriterion === 'all' ? '#ffffff4d' : ''}}>همه</button>
+                  <button className='font-normal cursor-default w-full hover:bg-[#ffffff0c] transition-all duration-300 p-1' onClick={()=>dispatch(setSwitch({key:'links',value:'new'}))} style={{backgroundColor:lCriterion === 'new' ? '#ffffff4d' : ''}}>ایجاد</button>
+                </div>
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
           </div>
           <div
             className="flex flex-col text-white gap-3 text-sm bg-[#313e4d] justify-center items-center rounded-sm w-[50%] cursor-default transition-all ease-in-out duration-400"

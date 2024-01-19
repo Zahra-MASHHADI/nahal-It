@@ -9,13 +9,20 @@ import ResponseHeader from "../../Components/ResponseHeader/ResponseHeader";
 import { toast } from "react-toastify";
 import { sendRecruitment } from "../../features/recruitment/action";
 import Cookies from "js-cookie";
+<<<<<<< HEAD
 import NotLogined from "../../Components/NotLogined/NotLogined";
 
 const Recruitment = () => {
   const loginStatus = useSelector(state => state.authentication.loginStatus);
   const token = useSelector(state => state.authentication.token);
   const tokens = useSelector(state => state.recruitment.token);
+=======
+
+const Recruitment = () => {
+  const userInfo = JSON.parse(Cookies.get("user"));
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
   const loading = useSelector(state => state.recruitment.loading);
+  const userToken = useSelector(state => state.authentication.token);
   const [birthDate,setBirthDate] = useState('');
   const dispatch = useDispatch();
 
@@ -30,10 +37,14 @@ const Recruitment = () => {
     dataObj = {
       ...dataObj,
       birthday:birthDate,
+<<<<<<< HEAD
       status:"waiting",
       user_id:userInfo.id
+=======
+      status:'waiting',
+      user_id: userInfo.id
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     }
-    console.log(dataObj)
     if(dataObj.phone < 12){
       toast.warn("شماره تلفن را درست وارد نشده است  ")
     }else if(!dataObj.birthday.length  < 1){
@@ -42,6 +53,9 @@ const Recruitment = () => {
     else
     {
       toast.warn("تاریخ تولد را وارد کنید")
+    }
+    if(dataObj.code_melli < 11){
+      toast.warn("کد ملی را درست  وارد کنید")
     }
   }
   useEffect(()=>{
@@ -177,10 +191,22 @@ const Recruitment = () => {
                 <input id="eduction_status" type="text" className="py-2 border border-solid border-[#c7c7c7] outline-none px-2" required={true} />
                 <label htmlFor="ability_description" className="font-[shabnamBold]">شرح توانایی شما (اختیاری)</label>
                 <textarea id="ability_description" className="min-h-[7rem] text-sm outline-none font-[shabnamMedium] p-2"></textarea>
+<<<<<<< HEAD
                 <label className="font-[shabnamBold]" htmlFor="card_number">
                   شماره کارت<span className="text-red-500">*</span>
                 </label>
                 <input id="card_number" type="text" className="py-2 border border-solid border-[#c7c7c7] outline-none px-2" required={true} />
+=======
+                <label htmlFor="card_number" className="font-[shabnamBold]">
+                  شماره کارت بانکی <span className="text-red-500">*</span>
+                </label>
+                <input
+                  required={true}
+                  id="card_number"
+                  type="text"
+                  className="py-2 border border-solid font-[shabnamMedium] border-[#cecece] outline-none px-2"
+                />
+>>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
                 <label htmlFor="shaba_number" className="font-[shabnamBold]">
                   شماره شبای کارت بانکی <span className="text-red-500">*</span>
                 </label>
