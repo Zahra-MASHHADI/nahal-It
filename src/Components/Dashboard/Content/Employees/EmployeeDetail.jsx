@@ -4,40 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import moment from 'moment-jalaali';
 import { updateUserInfo } from '../../../../features/userPanel/action';
-<<<<<<< HEAD
-import { choiceEmployee } from '../../../../features/dashboard/action';
-import Cookies from 'js-cookie';
-=======
 import { choiceRecruitment } from '../../../../features/dashboard/action';
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
 function EmployeeDetails({ setShowDetails , showDetails }) {
     const loading = useSelector(state => state.userPanel.isLoading);
-<<<<<<< HEAD
-    const userInfo = JSON.parse(Cookies.get("user"));
-    const userRole = roles.find(role => role.id === showDetails.role_id)
-    const [role,setRole] = useState(userRole?.title);
-=======
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     let loginDate = showDetails.created_at;
     let updateDate = showDetails.updated_at;
     const dispatch = useDispatch();
  
     loginDate = moment(loginDate, 'YYYY/MM/DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm:ss');
     updateDate = moment(updateDate, 'YYYY/MM/DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm:ss');
-<<<<<<< HEAD
-function choicerecruitment(status){
-    setShowDetails("");
-    dispatch(choiceEmployee({user:userInfo.id , status}))
-}
-  console.log(showDetails)
-
-=======
 
     function acceptRecruitment(item){
         dispatch(choiceRecruitment({ user:showDetails.user_id ,status:item }))
     }
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
   return (
     <div className='p-3 sm:p-10 w-full flex justify-center'>
     <div className='w-full 2xl:w-[70%] rounded-md bg-[#ffffffc9] flex flex-col gap-8 py-5 px-3'>
@@ -97,19 +77,6 @@ function choicerecruitment(status){
             <span className='font-semibold text-[#2e424a]'>تاریخ ویرایش:</span>
             <span className='pr-5 font-[shabnamBold]'>{updateDate}</span>
         </div>
-<<<<<<< HEAD
-        <div class="d-flex align-items-center justify-content-center vh-100">
-            {     showDetails.status !== 'accepted' 
-            && 
-            <div className=" text-white font-bold py-2 px-4 rounded inline-block max-w-full  bg-[#57C053] hover:bg-[#62d15e]  " onClick={()=> choicerecruitment('accepted')}> تایید برای استخدام </div>
-            }
-    
-        <div className="bg-rose-500 text-white font-bold py-2 px-4 rounded inline-block max-w-full hover:bg-rose-700 mx-3" onClick={()=> choicerecruitment('rejected')}> عدم تایید برای استخدام </div>
-   
-    
-  </div>
-     
-=======
         <div className='flex gap-2'>
         <span className='font-semibold text-[#2e424a]'>فعالیتها</span>
             <span className='pr-5'>{ showDetails.activity }</span>
@@ -128,7 +95,6 @@ function choicerecruitment(status){
         <div>
         <div onClick={() => acceptRecruitment('rejected')} className="button text-[#fff] bg-rose-700 2xl:w-[20%] text-center p-2 rounded-md cursor-pointer"> عدم تایید برای استخدام </div>
         </div>
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     </div>
    
 </div>

@@ -13,11 +13,7 @@ const UserSideBar = ({ dropMenu , logOutHandle}) => {
         <SideBarLink link={"favorites"} text={"علاقه مندی ها"}/>
         <SideBarLink link={"orders"} text={"سفارش ها"}/>
         <SideBarLink link={"downloads"} text={"دانلود ها"}/>
-<<<<<<< HEAD
         {userInfo.role_id === 5 && <SideBarLink link={'supervisorProjects'} text={"پروژه ها"} />}
-=======
-        {userInfo.role_id === 5 && <SideBarLink link={'supervisorProjects'} text={"پروژه ها"}/>}
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
         <SideBarLink link={"/"} text={"صفحه اصلی"}/>
     
         <li>

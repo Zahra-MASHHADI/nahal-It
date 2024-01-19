@@ -13,16 +13,7 @@ function Employee({ currentItems , setShowDetails }) {
   console.log(currentItems);
   return (
       <div className='w-full p-10 flex items-center 2xl:w-[70%] flex-col gap-5'>
-<<<<<<< HEAD
-     {currentItems.status == 'acceptad' ? 
-     <span className='w-full text-white font-bold'>تعداد( {currentItems !== null ? currentItems.length : 'NaN'} )</span>
-    :
-    <span className='w-full text-white font-bold'>تعداد( {currentItems !== null ? currentItems.length : 'NaN'} )</span>
-    }
-      
-=======
       <span className='w-full text-white font-bold'>تعداد استخدامی ها ({currentItems !== null ? currentItems.length : 'NaN'})</span>
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
       <div className='hidden md:flex bg-[#ffffff69] w-full p-5 text-white text-2xl justify-between'>
         <FaUsers/>
         <TbAlphabetLatin/>

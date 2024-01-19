@@ -11,16 +11,10 @@ const initialState = {
     codeSent:false,
     sendCodeLoading:false,
     oneTimeCode : false,
-<<<<<<< HEAD
     oneTimeCodeLoading : false,
     verifyPasswordCode :false,
     token:''
 }
-=======
-    verifyPasswordCode :false,
-    token: '',
-}   
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
 const authenticationSlice = createSlice({
     name:'authentication',
@@ -48,10 +42,6 @@ const authenticationSlice = createSlice({
             {
                 state.loading = false;
                 state.redirect = true;
-<<<<<<< HEAD
-
-=======
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
                 toast.success(action.payload.data.massage)
                 Cookies.set("user",JSON.stringify(action.payload.data.user))
                 localStorage.setItem("access_token",action.payload.data.token)
@@ -72,10 +62,6 @@ const authenticationSlice = createSlice({
                 state.loading = false;
                 state.redirect = false;
                 toast.warning(action.payload.error.data?.massage)
-<<<<<<< HEAD
-       
-=======
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
             }
             else
             {
@@ -83,10 +69,7 @@ const authenticationSlice = createSlice({
                 state.loading = false;
                 state.redirect = true;
                 toast.success(action.payload.data?.massage);
-<<<<<<< HEAD
-=======
                 state.token = action.payload.data.token;
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
                 localStorage.setItem("access_token",action.payload.data.token);
                 Cookies.set("user",JSON.stringify(action.payload.data.user));
                 state.loginStatus = true;
@@ -123,10 +106,7 @@ const authenticationSlice = createSlice({
            
             state.loading = false;
             state.redirect = false;
-<<<<<<< HEAD
        
-=======
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
         })
         .addCase(sendCode.fulfilled,(state,action) => {
             state.sendCodeLoading = false;
@@ -174,16 +154,10 @@ const authenticationSlice = createSlice({
         })
         
         .addCase(loginCode.fulfilled, (state, action) => {
-<<<<<<< HEAD
             state.oneTimeCodeLoading = false;
-=======
-            // state.sendCodeLoading = false;
- 
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
             if (action.payload.error) {
          
                 toast.warn(action.payload.error.data?.massage);
-<<<<<<< HEAD
                 state.oneTimeCode = false;
             
             } else {
@@ -191,18 +165,6 @@ const authenticationSlice = createSlice({
                 toast.success(action.payload.data.massage);
                 Cookies.set('user',JSON.stringify(action.payload.data.user));
                 state.oneTimeCode = true;
-=======
-                state.codeSent = false;
-                state.oneTimeCode = false;
-            
-            } else {
-
-                state.oneTimeCode = true;
-                toast.success(action.payload.data.massage);
-                Cookies.set('user',JSON.stringify(action.payload.data.user));
-                state.codeSent = true;
-               
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
                 state.token = action.payload.data.token; 
                
             }

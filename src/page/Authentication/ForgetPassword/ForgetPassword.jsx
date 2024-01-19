@@ -26,11 +26,6 @@ function ForgetPassword() {
   const new_password_confirmationRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     useEffect(() => {
         if(redirect)
         {
@@ -41,7 +36,6 @@ function ForgetPassword() {
         }
       },[redirect]);
       useEffect(() => {
-<<<<<<< HEAD
        if(verifyPassword){
         let mobile = phoneRef.current.value;
         let new_password = newPasswordRef.current.value;
@@ -66,47 +60,13 @@ function ForgetPassword() {
         }
        }
       },[verifyPassword]);
-=======
-        console.log(verifyPassword);
-        if(verifyPassword ){
-          let mobile = phoneRef.current.value;
-          let new_password = newPasswordRef.current.value;
-          let new_password_confirmation = new_password_confirmationRef.current.value;
-          switch(true)
-          {
-            case mobile.length === 0 : toast.warn('شماره تلفن را وارد کنید');
-            break;
-            case mobile.length < 11 : toast.warn('شماره تلفن کوتاه است');
-            break;
-            case new_password.length === 0 : toast.warn('رمز عبور را وارد کنید');
-            break;
-            case new_password.length < 8 : toast.warn('رمز عبور کوتاه است');
-            break;
-            case new_password.search(/\D+/g) === -1 || new_password.search(/\d+/g) === -1 : toast.warn('رمز عبور باید ترکیبی از اعداد و حروف باشد')
-            break; 
-            case new_password_confirmation.length === 0 : toast.warn('تکرار رمز عبور را وارد کنید');
-            break;
-            case new_password !== new_password_confirmation : toast.warn('تکرار رمز عبور تطابق ندارد');
-            break;
-            default : formSubmitter({mobile,new_password,new_password_confirmation});
-          }
-        }
-      }, [verifyPassword]);
-      
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
 
     const changePassword = (e) => {
         e.preventDefault()
         let mobile = phoneRef.current.value;
-<<<<<<< HEAD
         let new_password = newPasswordRef.current.value;
         let new_password_confirmation = new_password_confirmationRef.current.value;
         if(codeSent && !verifyPassword){
-=======
-          let new_password = newPasswordRef.current.value;
-          let new_password_confirmation = new_password_confirmationRef.current.value;
-        if(codeSent){
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
           let code = codeRef.current.value;
           switch(true) {
             case code.length === 0 : toast.warn("کد  را وارد کنید");
@@ -116,11 +76,7 @@ function ForgetPassword() {
             default : verifyCodeFnc({mobile , code})
       
           }
-<<<<<<< HEAD
         }else if(!codeSent && !verifyPassword){
-=======
-        }else if(!verifyPassword && !codeSent){
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
           switch(true) {
             case mobile.length === 0 : toast.warn("شماره تلفن را وارد کنید");
             break;
@@ -141,14 +97,9 @@ function ForgetPassword() {
             default : loginFnc({mobile})
       
           }
-<<<<<<< HEAD
         }else
         if(verifyPassword){
         }
-=======
-        }
-       
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
         
       };
 

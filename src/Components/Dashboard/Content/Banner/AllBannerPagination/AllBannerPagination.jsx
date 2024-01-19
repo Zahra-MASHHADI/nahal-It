@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import AllBanner from '../AllBanner/AllBanner';
+
 import { getBanner, getLinks } from '../../../../../features/dashboard/action';
 
 function BannerPagination() {
@@ -35,7 +35,7 @@ function BannerPagination() {
       </div>
      :
      <>
-      <AllBanner currentItems={currentItems} bannerLength={banner?.length} deleteLoading={deleteLoading} dispatch={dispatch}/>
+      <BannerPagination currentItems={currentItems} bannerLength={banner?.length} deleteLoading={deleteLoading} dispatch={dispatch}/>
       <ReactPaginate
       breakLabel="..."
       nextLabel={mobile ? '>>' : "برگه بعدی >>"}

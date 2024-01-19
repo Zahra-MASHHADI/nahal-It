@@ -13,12 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function OneTimeCode(){
     const loading = useSelector(state => state.authentication.loading);
     const redirect = useSelector(state => state.authentication.redirect);
-<<<<<<< HEAD
     const codeSent = useSelector(state => state.authentication.oneTimeCode);
-=======
-    const codeSent = useSelector(state => state.authentication.codeSent);
-    const oneTimeCode = useSelector(state => state.authentication.oneTimeCode);
->>>>>>> 9bac44576d0de40b6e6ab9a79dbe177019705ee9
     const phoneRef = useRef();
     const codeRef = useRef();
     const navigate = useNavigate();
